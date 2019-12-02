@@ -30,7 +30,7 @@ public class Cliente extends Persona implements Serializable{
 	
 	@Column(name="FREGISTRO")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="dd-MM-yyyy")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Calendar fRegistro;
 	
 	@OneToMany(mappedBy="cliente", fetch=FetchType.LAZY)

@@ -33,7 +33,7 @@ public abstract class Persona {
 	private  String apellidos;
 
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="dd-MM-yyyy")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@Past
 	@Column(name="FNACIMIENTO")
 	private Calendar fNacimiento;
