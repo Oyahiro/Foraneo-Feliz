@@ -14,4 +14,7 @@ public interface IClienteService {
 
 	public List<Cliente>findAll();
 	
+	public List<Cliente> findByApellido(String filtro);
+	
+	public Cliente findByCorreo(String correo);
 }

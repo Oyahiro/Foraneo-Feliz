@@ -74,4 +74,19 @@ public class ClienteController {
 		}
 		return "redirect:/cliente/list";
 	}
+	
+	@GetMapping(value="/findByApellido/{filtro}")
+	public String findByApellido(@PathVariable(value="filtro") String filtro, Model model) {
+		List<Cliente> lista = service.findByApellido(filtro);
+		model.addAttribute("title", "Listado de pacientes encontrados");
+		model.addAttribute("lista", lista);
+		return "cliente/list";		
+	} 
+	
+	@GetMapping(value="/findByCedula/{cedula}")
+	public String findByCorreo(@PathVariable(value="correo") String correo, Model model) {
+		Cliente encontrado = service.findByCorreo(correo);
+		model.addAttribute("cliente", encontrado);
+		return "cliente/card";				
+	}
 }

@@ -26,6 +26,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		return new BCryptPasswordEncoder();
 	}
 	
+	@Autowired
 	public void configurerGlobal(AuthenticationManagerBuilder builder) throws Exception {
 		PasswordEncoder encoder = passwordEncoder();
 		UserBuilder users = 

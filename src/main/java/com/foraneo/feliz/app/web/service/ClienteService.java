@@ -39,4 +39,14 @@ public class ClienteService implements IClienteService{
 		return (List<Cliente>)dao.findAll();
 	}
 
+	@Override
+	public List<Cliente> findByApellido(String filtro) {
+		return dao.findByApellido(filtro);
+	}
+
+	@Override
+	public Cliente findByCorreo(String correo) {
+		return dao.findByCorreo(correo);
+	}
+
 }
