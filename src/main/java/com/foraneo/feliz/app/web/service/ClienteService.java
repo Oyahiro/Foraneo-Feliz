@@ -41,22 +41,12 @@ public class ClienteService implements IClienteService{
 
 	@Override
 	public List<Cliente> findByApellido(String filtro) {
-<<<<<<< Updated upstream
-=======
-		//JPQL Lenguaje parecido al SQL que interactua con el ORM
->>>>>>> Stashed changes
 		return dao.findByApellido(filtro);
 	}
 
 	@Override
-<<<<<<< Updated upstream
 	public Cliente findByCorreo(String correo) {
 		return dao.findByCorreo(correo);
-=======
-	public Cliente findByCedula(String cedula) {
-		// TODO Auto-generated method stub
-		return dao.findByCedula(cedula);
->>>>>>> Stashed changes
 	}
 
 }
