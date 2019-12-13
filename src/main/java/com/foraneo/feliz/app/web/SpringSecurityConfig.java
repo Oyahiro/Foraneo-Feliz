@@ -32,15 +32,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		UserBuilder users = 
 				User.builder().passwordEncoder(password -> encoder.encode(password));
 		builder.inMemoryAuthentication()
-			.withUser(users.username("admin").password("12345").roles("ADMIN"))
-			.withUser(users.username("user").password("12345").roles("USER"));
+			.withUser(users.username("Administrador").password("12345").roles("ADMIN"))
+			.withUser(users.username("Usuario").password("12345").roles("USER"));
 	}
 	
 	public void configure(HttpSecurity http) throws Exception{
 		http.authorizeRequests()
-			.antMatchers("/", "/css/**", "/js/**").permitAll()
-			.antMatchers("/platillo/**").hasAnyRole("ADMIN") //la carpeta region es solo para ADMIN
-			.antMatchers("/encomendero/**").hasAnyRole("USER", "ADMIN")
+			.antMatchers("/", "/css/**", "/js/**", "/img/**", "/images/**").permitAll()
+			.antMatchers("/cliente/**", "/encomendero/**", "/platillo/**", "/restaurante/**").hasAnyRole("ADMIN") //la carpeta region es solo para ADMIN
+			//.antMatchers("/encomendero/**").hasAnyRole("USER", "ADMIN")
 			.anyRequest().authenticated()
 			.and()
 				.formLogin().successHandler(successHandler)

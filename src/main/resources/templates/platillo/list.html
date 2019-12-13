@@ -3,7 +3,8 @@
 <head th:replace="layout :: frgHead"></head>
 <body>
 <div id="wrapper">
-	<header th:replace="layout :: frgHeader"></header>
+	<div th:replace="layout :: frgNavigation"></div>
+	<div th:replace="layout :: frgHeaderSection"></div>
 	<div id="content-wrapper" class="d-flex flex-column">
 		<!-- Begin Page Content -->
 		<div class="container">
@@ -54,6 +55,8 @@
 					</div>
 				</div>
 			</div>
+			<br />
+			<br />
 			<footer th:replace="layout :: frgFooter"></footer>
 		</div>
 	</div>

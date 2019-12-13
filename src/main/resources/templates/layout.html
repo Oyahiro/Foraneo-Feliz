@@ -1,103 +1,356 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+
 <head th:fragment="frgHead">
 <meta charset="UTF-8">
-<title>Universidad de las Fuerzas Armadas</title>
+<title>El Foraneo Feliz</title>
+
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+
+<!-- Plantilla -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/agency.min.css}" rel="stylesheet">
+
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
 	integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
 	crossorigin="anonymous">
 </head>
-<body>
-	<header th:fragment="frgHeader" class="container">
-		<br />
-		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-			<a class="navbar-brand" th:href="@{/}">Inicio</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item"><a class="nav-link"
-						th:href="@{/cliente/list}">Cliente</a></li>
+
+
+
+<body id="page-top">
+
+	<!-- Navigation -->
+    <nav th:fragment="frgNavigation" class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" th:href="@{/}">Foraneo Feliz</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase ml-auto">
+            
+            <li class="nav-item">
+            	<a class="nav-link js-scroll-trigger" href="#">Pedido</a>
+            </li>
+            
+            <li class="nav-item">
+            	<a class="nav-link js-scroll-trigger" th:href="@{/cliente/list}">Cliente</a>
+            </li>
+			
+			<li class="nav-item">
+				<a class="nav-link js-scroll-trigger" th:href="@{/encomendero/list}">Encomendero</a>
+			</li>
 					
-					<li class="nav-item"><a class="nav-link"
-						th:href="@{/encomendero/list}">Encomendero</a></li>
-					
-					<li class="nav-item"><a class="nav-link"
-						th:href="@{/restaurante/list}">Restaurante</a></li>
+			<li class="nav-item">
+				<a class="nav-link js-scroll-trigger" th:href="@{/restaurante/list}">Restaurante</a>
+			</li>
 				
-					<li class="nav-item"><a class="nav-link"
-						th:href="@{/platillo/list}">Platillo</a></li>
+			<li class="nav-item">
+				<a class="nav-link js-scroll-trigger" th:href="@{/platillo/list}">Platillo</a>
+			</li>
 						
-					<li sec:authorize="!isAuthenticated()">
-						<a class="btn btn-outline-primary" th:href="@{/login}">Iniciar sesi&oacute;n</a>
-					</li>
-					
-					<li sec:authorize="isAuthenticated()" class="dropdown shown">
-						<a class="btn btn-outline-primary dropdown-toggle" href="#"
-							role="button" id="dropdownMenuLink" data-toggle="dropdown">
-							<span sec:authentication="name"></span>
-						</a>
-						<div class="dropdown-menu">
-							<form id="frmLogout" th:action="@{/logout}" method="post">
-								<button class="dropdown-item" 
-								onclick="document.getElementById('frmLogout').submit();">Salir</button>
-								<input type="hidden" th:name="${_csrf.parameterName}" 
-									th:value="${_csrf.token}"/>														
-							</form>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</nav>		
-			<div id="success-alert" class="alert alert-success" role="alert"
-                th:if="${success != null}">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <span th:text=${success}></span>
-            </div>
-        <div id="error-alert" class="alert alert-danger" role="alert" th:if="${error != null}" th:text=${error}></div>
-        <div id="warning-alert" class="alert alert-warning" role="alert" th:if="${warning != null}" th:text=${warning}></div>
-        <div id="info-alert" class="alert alert-info" role="alert" th:if="${info != null}" th:text=${info}></div>
- 
-    </header>
-
-    <div class="container"></div>
-
-    <footer th:fragment="frgFooter" class="container">
-        <br />
-        <hr />
-        <div class="row">
-            <div class="col-md-1">
-                <i class="fas fa-university fa-5x"></i>
-            </div>
-        
-            <div class="col-md-9">
-                <h5 class="card-title">Universidad de las Fuerzas Armadas</h5>
-                <div class="card-text">
-                    <strong>Carrera de ingeniería de Software</strong><br /> <small>Belisario
-                        Quevedo - Latacunga</small>
-                </div>
-	        </div>
-	        
-	        <div class="col-md-1 center-block">
-	            <p sec:authorize="isAuthenticated()">
-	                    
-	                Usuario:&nbsp;<span sec:authentication="name"></span>
-	               	Roles:&nbsp;<span sec:authentication="principal.authorities"> </span>  
-	            </p>
-	            <p>ISOW&copy;2019</p>
-	        </div>
+			<li class="nav-item" sec:authorize="!isAuthenticated()">
+				<a class="btn btn-outline-primary" th:href="@{/login}">Iniciar sesi&oacute;n</a>
+			</li>
+    
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+				<form id="frmLogout" th:action="@{/logout}" method="post">
+					<a class="btn btn-outline-primary" href="#"
+						onclick="document.getElementById('frmLogout').submit();">
+						<i class="fas fa-sign-out-alt"></i>Salir
+					</a>
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				</form>
+			</li>
+          </ul>
         </div>
-        <hr />
+      </div>
+    </nav>
+
+	<header th:fragment="frgHeader" class="masthead">
+	  <div class="container">
+	    <div class="intro-text">
+	      <div class="intro-lead-in">¡Bienvenido!</div>
+	      <div class="intro-heading text-uppercase">El Foraneo Feliz</div>
+	      <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Hacer pedido</a>
+	    </div>
+	  </div>
+	  </header>
+	
+	<header th:fragment="frgHeaderSection" class="mastheadSection">
+	  <div class="container">
+	    <div class="intro-text">
+	      <br/>
+	      <br/>
+	      <br/>
+	      <br/>
+	    </div>
+	  </div>
+	  </header>
+	
+	<section th:fragment="frgServices" class="page-section" id="services">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-lg-12 text-center">
+	        <h2 class="section-heading text-uppercase">Servicios</h2>
+	        <h3 class="section-subheading text-muted">Disfruta de todas nuestras funciones.</h3>
+	      </div>
+	    </div>
+	    <div class="row text-center">
+	      <div class="col-md-4">
+	        <span class="fa-stack fa-4x">
+	          <i class="fas fa-circle fa-stack-2x text-primary"></i>
+	          <i class="fas fa-truck fa-stack-1x fa-inverse"></i>
+	        </span>
+	        <h4 class="service-heading">A domicilio</h4>
+	        <p class="text-muted">Realiza pedidos desde tu cuenta en los horarios establecidos y rec&iacute;belo en la puerta de tu hogar.</p>
+	      </div>
+	      <div class="col-md-4">
+	        <span class="fa-stack fa-4x">
+	          <i class="fas fa-circle fa-stack-2x text-primary"></i>
+	          <i class="fas fa-coffee fa-stack-1x fa-inverse"></i>
+	        </span>
+	        <h4 class="service-heading">Caf&eacute; pendiente</h4>
+	        <p class="text-muted">Realiza pedidos de tipo regalo para otra persona incluso de forma an&oacute;nima.</p>
+	      </div>
+	      <div class="col-md-4">
+	        <span class="fa-stack fa-4x">
+	          <i class="fas fa-circle fa-stack-2x text-primary"></i>
+	          <i class="fas fa-donate fa-stack-1x fa-inverse"></i>
+	        </span>
+	        <h4 class="service-heading">Donar</h4>
+	        <p class="text-muted">Dentro de nuestra empresa amamos ayudar, realiza donaciones ayudarnos a brindar apoyo a personas sin un hogar y a los animales callejeros.</p>
+	      </div>
+	    </div>
+	  </div>
+	</section>
+	
+	<div th:fragment="frgPortafolio">
+		<!-- Portfolio Grid -->
+		<section class="bg-light page-section" id="portfolio">
+		  <div class="container">
+		    <div class="row">
+		      <div class="col-lg-12 text-center">
+		       <h2 class="section-heading text-uppercase">Especialidades</h2>
+		        <h3 class="section-subheading text-muted">Disfruta de nuestros platillos m&aacute;s famosos.</h3>
+		      </div>
+		    </div>
+		    <div class="row">
+		      <div class="col-md-4 col-sm-6 portfolio-item">
+		        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+		          <div class="portfolio-hover">
+		            <div class="portfolio-hover-content">
+		              <i class="fas fa-plus fa-3x"></i>
+		            </div>
+		          </div>
+		          <img class="img-fluid" src="img/portfolio/01-thumbnail.jpg" alt="Patacon Burguer" width="350">
+		        </a>
+		        <div class="portfolio-caption">
+		          <h4>Patac&oacute;n burguer</h4>
+		          <p class="text-muted">Illustration</p>
+		        </div>
+		      </div>
+		      <div class="col-md-4 col-sm-6 portfolio-item">
+		        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal2">
+		          <div class="portfolio-hover">
+		            <div class="portfolio-hover-content">
+		              <i class="fas fa-plus fa-3x"></i>
+		            </div>
+		          </div>
+		          <img class="img-fluid" src="img/portfolio/02-thumbnail.jpg" alt="Morocho" width="350">
+		        </a>
+		        <div class="portfolio-caption">
+		          <h4>Morocho</h4>
+		          <p class="text-muted">Graphic Design</p>
+		        </div>
+		      </div>
+		      <div class="col-md-4 col-sm-6 portfolio-item">
+		        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3">
+		          <div class="portfolio-hover">
+		            <div class="portfolio-hover-content">
+		              <i class="fas fa-plus fa-3x"></i>
+		            </div>
+		          </div>
+		          <img class="img-fluid" src="img/portfolio/03-thumbnail.jpg" alt="Burrillo" width="350">
+		        </a>
+		        <div class="portfolio-caption">
+		          <h4>Burrillos</h4>
+		          <p class="text-muted">Identity</p>
+		        </div>
+		       </div>
+		    </div>
+		  </div>
+		</section>
+		
+		<!-- Portfolio Modals -->
+		
+		<!-- Modal 1 -->
+		<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="close-modal" data-dismiss="modal">
+		        <div class="lr">
+		          <div class="rl"></div>
+		        </div>
+		      </div>
+		      <div class="container">
+		        <div class="row">
+		          <div class="col-lg-8 mx-auto">
+		            <div class="modal-body">
+		              <!-- Project Details Go Here -->
+		              <h2 class="text-uppercase">Project Name</h2>
+		              <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+		              <img class="img-fluid d-block mx-auto" src="img/portfolio/01-full.jpg" alt="">
+		              <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+		              <ul class="list-inline">
+		                <li>Date: January 2017</li>
+		                <li>Client: Threads</li>
+		                <li>Category: Illustration</li>
+		              </ul>
+		              <button class="btn btn-primary" data-dismiss="modal" type="button">
+		                <i class="fas fa-times"></i>
+		                Close Project</button>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<!-- Modal 2 -->
+		<div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="close-modal" data-dismiss="modal">
+		        <div class="lr">
+		          <div class="rl"></div>
+		        </div>
+		      </div>
+		      <div class="container">
+		        <div class="row">
+		          <div class="col-lg-8 mx-auto">
+		            <div class="modal-body">
+		              <!-- Project Details Go Here -->
+		              <h2 class="text-uppercase">Project Name</h2>
+		              <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+		              <img class="img-fluid d-block mx-auto" src="img/portfolio/02-full.jpg" alt="">
+		              <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+		              <ul class="list-inline">
+		                <li>Date: January 2017</li>
+		                <li>Client: Explore</li>
+		                <li>Category: Graphic Design</li>
+		              </ul>
+		              <button class="btn btn-primary" data-dismiss="modal" type="button">
+		                <i class="fas fa-times"></i>
+		                Close Project</button>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<!-- Modal 3 -->
+		<div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="close-modal" data-dismiss="modal">
+		        <div class="lr">
+		          <div class="rl"></div>
+		        </div>
+		      </div>
+		      <div class="container">
+		        <div class="row">
+		          <div class="col-lg-8 mx-auto">
+		            <div class="modal-body">
+		              <!-- Project Details Go Here -->
+		              <h2 class="text-uppercase">Project Name</h2>
+		              <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+		              <img class="img-fluid d-block mx-auto" src="img/portfolio/03-full.jpg" alt="">
+		              <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+		              <ul class="list-inline">
+		                <li>Date: January 2017</li>
+		                <li>Client: Finish</li>
+		                <li>Category: Identity</li>
+		              </ul>
+		              <button class="btn btn-primary" data-dismiss="modal" type="button">
+		                <i class="fas fa-times"></i>
+		                Close Project</button>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	
+	
+	
+    <footer th:fragment="frgFooter" class="footer">
+        <div class="container">
+	      <div class="row align-items-center">
+	        <div class="col-md-4">
+	          <span class="copyright">Copyright &copy; Your Website 2019</span>
+	        </div>
+	        <div class="col-md-4">
+	          <ul class="list-inline social-buttons">
+	            <li class="list-inline-item">
+	              <a href="#">
+	                <i class="fab fa-twitter"></i>
+	              </a>
+	            </li>
+	            <li class="list-inline-item">
+	              <a href="#">
+	                <i class="fab fa-facebook-f"></i>
+	              </a>
+	            </li>
+	            <li class="list-inline-item">
+	              <a href="#">
+	                <i class="fab fa-linkedin-in"></i>
+	              </a>
+	            </li>
+	          </ul>
+	        </div>
+	        <div class="col-md-4">
+	          <ul class="list-inline quicklinks">
+	            <li class="list-inline-item">
+	              <a href="#">Cont&aacute;ctanos</a>
+	            </li>
+	            <li class="list-inline-item">
+	              <a href="#">Recursos</a>
+	            </li>
+	          </ul>
+	        </div>
+	      </div>
+	    </div>
+        
+        <!-- Importacion de archivos JS -->
         <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
         <script th:src="@{/js/popper.js}"></script>
         <script th:src="@{/js/bootstrap.min.js}"></script>
         <script th:src="@{/js/layout.js}"></script>
+        
+        <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+		<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+		<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+		<script th:src="@{/js/jqBootstrapValidation.js}"></script>
+		<script th:src="@{/js/agency.min.js}"></script>
     </footer>
-
+	
+	
 </body>
 </html>
