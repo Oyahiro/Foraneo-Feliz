@@ -10,10 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.sun.istack.NotNull;
 
 @MappedSuperclass
 public abstract class Persona {
@@ -26,20 +29,24 @@ public abstract class Persona {
 		
 	@Column(name="NOMBRES")
 	@Size(max=55)
+	@NotEmpty
 	private  String  nombres;
 	
 	@Column(name="APELLIDOS")
 	@Size(max=55)
+	@NotEmpty
 	private  String apellidos;
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@Past
 	@Column(name="FNACIMIENTO")
+	@NotNull
 	private Calendar fNacimiento;
 	
 	@Column(name="CELULAR")
 	@Size(max=10)
+	@NotEmpty
 	private  String  celular;
 
 	public Persona() {

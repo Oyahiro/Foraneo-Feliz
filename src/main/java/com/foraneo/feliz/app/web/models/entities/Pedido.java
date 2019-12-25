@@ -34,7 +34,7 @@ public class Pedido implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name="IDPEDIDO")
-	private  Integer idpedido;
+	private Integer idpedido;
 	
 	@Column(name="ESTADO")
 	@NotNull

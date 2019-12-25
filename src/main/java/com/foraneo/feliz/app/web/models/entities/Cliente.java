@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name="CLIENTE")
 public class Cliente extends Persona implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name="CORREO")
