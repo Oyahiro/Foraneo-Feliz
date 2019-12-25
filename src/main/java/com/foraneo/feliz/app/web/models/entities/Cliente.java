@@ -11,9 +11,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="CLIENTE")
@@ -26,6 +29,7 @@ public class Cliente extends Persona implements Serializable{
 	
 	@Column(name="CORREO")
 	@Size(max=30)
+	@NotEmpty
 	private String correo;
 	
 	@Column(name="FREGISTRO")
@@ -33,6 +37,7 @@ public class Cliente extends Persona implements Serializable{
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Calendar fRegistro;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="cliente", fetch=FetchType.LAZY)
 	private List<Pedido> pedido;
 
@@ -55,9 +60,5 @@ public class Cliente extends Persona implements Serializable{
 
 	public void setfRegistro(Calendar fRegistro) {
 		this.fRegistro = fRegistro;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 }

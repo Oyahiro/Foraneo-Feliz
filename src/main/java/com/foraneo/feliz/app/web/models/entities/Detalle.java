@@ -12,13 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
+
 @Entity
 @Table(name="DETALLE")
 public class Detalle implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +26,12 @@ public class Detalle implements Serializable{
 	private  Integer iddetalle;
 	
 	@Column(name="CANTIDAD")
+	@NotNull
 	private Integer cantidad;
 	
 	@Column(name="TOTALINDIVIDUAL")
 	private Float totalindividual;
-	
+	@NotNull
 	@JoinColumn (name="IDPEDIDO", referencedColumnName="IDPEDIDO")
 	@ManyToOne
 	private Pedido pedido;
@@ -83,9 +83,5 @@ public class Detalle implements Serializable{
 
 	public void setPlatillo(Platillo platillo) {
 		this.platillo = platillo;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 }

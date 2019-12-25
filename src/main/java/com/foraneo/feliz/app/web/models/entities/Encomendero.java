@@ -8,7 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="ENCOMENDERO")
@@ -21,8 +24,10 @@ public class Encomendero extends Persona implements Serializable{
 	
 	@Column(name="CEDULA")
 	@Size(max=10)
+	@NotEmpty
 	private String cedula;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="encomendero", fetch=FetchType.LAZY)
 	private List<Pedido> pedido;
 
@@ -37,9 +42,5 @@ public class Encomendero extends Persona implements Serializable{
 
 	public void setCedula(String cedula) {
 		this.cedula = cedula;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 }

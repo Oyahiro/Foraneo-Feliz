@@ -17,17 +17,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name="PEDIDO")
 public class Pedido implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -37,18 +37,22 @@ public class Pedido implements Serializable{
 	private  Integer idpedido;
 	
 	@Column(name="ESTADO")
+	@NotNull
 	private Boolean estado;
 	
 	@Column(name="TOTAL")
+	@NotNull
 	private Float total;
 	
 	@Column(name="DIRECCION")
 	@Size(max=50)
+	@NotEmpty
 	private String direccion;
 	
 	@Column(name="FECHAPEDIDO")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@NotNull
 	private Calendar fechapedido;
 	
 	@JoinColumn (name="IDENCOMENDERO", referencedColumnName="IDPERSONA")
@@ -129,9 +133,5 @@ public class Pedido implements Serializable{
 
 	public void setDetalle(List<Detalle> detalle) {
 		this.detalle = detalle;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 }

@@ -14,15 +14,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name="PLATILLO")
 public class Platillo implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,15 +33,19 @@ public class Platillo implements Serializable{
 	
 	@Column(name="NOMBRE")
 	@Size(max=30)
+	@NotEmpty
 	private String nombre;
 	
 	@Column(name="DESCRIPCION")
 	@Size(max=100)
+	@NotEmpty
 	private String descripcion;
 	
 	@Column(name="PRECIO")
+	@NotNull
 	private Float precio;
 
+	@JsonIgnore
 	@OneToMany(mappedBy="platillo", fetch=FetchType.LAZY)
 	private List<Detalle> detalle;
 	
@@ -91,9 +96,5 @@ public class Platillo implements Serializable{
 
 	public void setRestaurante(Restaurante restaurante) {
 		this.restaurante = restaurante;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 }
