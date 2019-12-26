@@ -25,7 +25,7 @@ public class ClienteController {
 	public String create(Model model) {
 		Cliente cliente = new Cliente();
 		model.addAttribute("cliente", cliente);  //El model reemplaza al ViewBag
-		model.addAttribute("tittle", "Registro de nuevo cliente");
+		model.addAttribute("title", "Registrar cliente");
 		return "cliente/form";
 	}
 	
@@ -33,7 +33,7 @@ public class ClienteController {
 	public String retrieve(@PathVariable(value="id") Integer id, Model model) {
 		Cliente cliente = service.findById(id);
 		model.addAttribute("cliente", cliente);
-		model.addAttribute("tittle", "Detalle de cliente");
+		model.addAttribute("title", "Detalles de cliente");
 		return "cliente/card";
 	}
 	
@@ -61,6 +61,7 @@ public class ClienteController {
 	public String list(Model model) {
 		List<Cliente> list = service.findAll();
 		model.addAttribute("list", list);
+		model.addAttribute("title", "Lista de clientes");
 		return "cliente/list";
 	}
 	

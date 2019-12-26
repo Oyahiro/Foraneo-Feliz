@@ -15,13 +15,12 @@
 			<div class="card-body">
 				<div class="form-group row">
 					<div class="content col-sm-1">
-						<i class="fas fa-info-circle"></i>
+						<i class="far fa-id-card fa-2x"></i>
 					</div>
-					<h3 class="card-title col-sm-6"
-						th:text="${restaurante.nombre}"></h3>
+					<h4 class="card-title col-sm-7"	th:text="${title}"></h4>
 					<div class="col-sm-4">
 						<button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-						<i class="fas fa-info-circle"></i>&nbsp;Eliminar</button>
+						<i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
 						<a class="btn btn-primary" th:href="@{/restaurante/list}"><i
 							class="fas fa-arrow-left"></i>&nbsp;Volver</a>
 					</div>
@@ -33,50 +32,50 @@
 					<div class="col-md-12">
 						<div class="form-group row">
 							<div class="content col-sm-3 bg-light">
-								<i class="far fa-sticky-note"></i> <label class="h5 col-form-label">&nbsp;Nombre:</label>
+								<i class="fas fa-store-alt"></i> <label class="h5 col-form-label">&nbsp;Nombre:</label>
 							</div>
 							<div class="col-sm-8">
-								<h5 class="card-text" th:text="${restaurante.nombre}"></h5>
+								<h6 class="card-text" th:text="${restaurante.nombre}"></h6>
 							</div>
 						</div>
 						<div class="form-group row">
 							<div class="content col-sm-3 bg-light">
-								<i class="far fa-sticky-note"></i> <label class="h5 col-form-label">&nbsp;Correo:</label>
+								<i class="far fa-envelope"></i> <label class="h5 col-form-label">&nbsp;Correo:</label>
 							</div>
 							<div class="col-sm-8">
-								<h5 class="card-text" th:text="${restaurante.correo}"></h5>
+								<h6 class="card-text" th:text="${restaurante.correo}"></h6>
 							</div>
 						</div>
 						<div class="form-group row">
 							<div class="content col-sm-3 bg-light">
-								<i class="far fa-sticky-note"></i> <label class="h5 col-form-label">&nbsp;Tipo:</label>
+								<i class="fas fa-utensils"></i> <label class="h5 col-form-label">&nbsp;Tipo:</label>
 							</div>
 							<div class="col-sm-8">
-								<h5 class="card-text" th:text="${restaurante.tipo}"></h5>
+								<h6 class="card-text" th:text="${restaurante.tipo}"></h6>
 							</div>
 						</div>
 						<div class="form-group row">
 							<div class="content col-sm-3 bg-light">
-								<i class="far fa-sticky-note"></i> <label class="h5 col-form-label">&nbsp;Celular:</label>
+								<i class="fas fa-mobile-alt"></i> <label class="h5 col-form-label">&nbsp;Celular:</label>
 							</div>
 							<div class="col-sm-8">
-								<h5 class="card-text" th:text="${restaurante.celular}"></h5>
+								<h6 class="card-text" th:text="${restaurante.celular}"></h6>
 							</div>
 						</div>
 						<div class="form-group row">
 							<div class="content col-sm-3 bg-light">
-								<i class="far fa-sticky-note"></i> <label class="h5 col-form-label">&nbsp;Direccion:</label>
+								<i class="fas fa-route"></i> <label class="h5 col-form-label">&nbsp;Direccion:</label>
 							</div>
 							<div class="col-sm-8">
-								<h5 class="card-text" th:text="${restaurante.direccion}"></h5>
+								<h6 class="card-text" th:text="${restaurante.direccion}"></h6>
 							</div>
 						</div>
 						<div class="form-group row">
 							<div class="content col-sm-3 bg-light">
-								<i class="far fa-sticky-note"></i> <label class="h5 col-form-label">&nbsp;Sitio web:</label>
+								<i class="far fa-window-restore"></i> <label class="h5 col-form-label">&nbsp;Sitio web:</label>
 							</div>
 							<div class="col-sm-8">
-								<h5 class="card-text" th:text="${restaurante.web}"></h5>
+								<h6 class="card-text" th:text="${restaurante.web}"></h6>
 							</div>
 						</div>
 					</div>

@@ -25,7 +25,7 @@ public class EncomenderoController {
 	public String create(Model model) {
 		Encomendero encomendero = new Encomendero();
 		model.addAttribute("encomendero", encomendero);  //El model reemplaza al ViewBag
-		model.addAttribute("tittle", "Registro de nuevo encomendero");
+		model.addAttribute("title", "Registrar encomendero");
 		return "encomendero/form";
 	}
 	
@@ -33,7 +33,7 @@ public class EncomenderoController {
 	public String retrieve(@PathVariable(value="id") Integer id, Model model) {
 		Encomendero encomendero = service.findById(id);
 		model.addAttribute("encomendero", encomendero);
-		model.addAttribute("tittle", "Detalle de encomendero");
+		model.addAttribute("title", "Detalles de encomendero");
 		return "encomendero/card";
 	}
 	
@@ -53,17 +53,15 @@ public class EncomenderoController {
 	public String update(@PathVariable(value="id") Integer id, Model model) {
 		Encomendero encomendero = service.findById(id);
 		model.addAttribute("encomendero", encomendero);
-		model.addAttribute("title", "Actualizar datos de encomendero");
+		model.addAttribute("title", "Actualizar encomendero");
 		return "encomendero/form";
 	}
 	
 	@GetMapping(value="/list")
 	public String list(Model model) {
 		List<Encomendero> list = service.findAll();
-		
-		
-		
 		model.addAttribute("list", list);
+		model.addAttribute("title", "Lista de encomenderos");
 		return "encomendero/list";
 	}
 	

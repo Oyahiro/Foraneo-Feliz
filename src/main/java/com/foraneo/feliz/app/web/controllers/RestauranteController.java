@@ -25,7 +25,7 @@ public class RestauranteController {
 	public String create(Model model) {
 		Restaurante restaurante = new Restaurante();
 		model.addAttribute("restaurante", restaurante);  //El model reemplaza al ViewBag
-		model.addAttribute("tittle", "Registro de nuevo restaurante");
+		model.addAttribute("title", "Registrar restaurante");
 		return "restaurante/form";
 	}
 	
@@ -33,7 +33,7 @@ public class RestauranteController {
 	public String retrieve(@PathVariable(value="id") Integer id, Model model) {
 		Restaurante restaurante = service.findById(id);
 		model.addAttribute("restaurante", restaurante);
-		model.addAttribute("tittle", "Detalle de restaurante");
+		model.addAttribute("title", "Detalles de restaurante");
 		return "restaurante/card";
 	}
 	
@@ -53,7 +53,7 @@ public class RestauranteController {
 	public String update(@PathVariable(value="id") Integer id, Model model) {
 		Restaurante restaurante = service.findById(id);
 		model.addAttribute("restaurante", restaurante);
-		model.addAttribute("title", "Actualizar datos de restaurante");
+		model.addAttribute("title", "Actualizar restaurante");
 		return "restaurante/form";
 	}
 	
@@ -61,6 +61,7 @@ public class RestauranteController {
 	public String list(Model model) {
 		List<Restaurante> list = service.findAll();
 		model.addAttribute("list", list);
+		model.addAttribute("title", "Lista de restaurantes");
 		return "restaurante/list";
 	}
 	

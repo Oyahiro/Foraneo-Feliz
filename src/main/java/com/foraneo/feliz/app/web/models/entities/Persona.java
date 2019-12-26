@@ -45,7 +45,7 @@ public abstract class Persona {
 	private Calendar fNacimiento;
 	
 	@Column(name="CELULAR")
-	@Size(max=10)
+	@Size(min=10, max=10)
 	@NotEmpty
 	private  String  celular;
 

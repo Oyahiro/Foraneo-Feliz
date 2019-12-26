@@ -13,17 +13,14 @@
 				<div class="card col-md-12">
 					<div class="card-body">
 						<div class="form-group row">
-							<div class="content col-sm-1">
-								<i class="far fa-plus-square fa-2x"></i>
-							</div>
 							<h3 class="card-title col-sm-10" th:text="${title}"></h3>
 						</div>
 						<hr />
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th><i class="fas fa-info-circle"></i>&nbsp;Nombre</th>
-									<th><i class="fas fa-info-circle"></i>&nbsp;Precio</th>
+									<th><i class="fas fa-utensils"></i>&nbsp;Nombre</th>
+									<th><i class="fas fa-coins"></i>&nbsp;Precio</th>
 									<th><i class="far fa-sticky-note"></i>&nbsp;Descripcion</th>
 																
 									<th><a class="btn btn-sm btn-success" th:href="@{/platillo/create}" >
@@ -41,11 +38,12 @@
 										<div class="row">
 											<a class="btn btn-sm btn-warning" title="Editar"
 											   th:href="@{/platillo/update/} + ${platillo.idplatillo}">
-												<i class="fas fa-edit"></i>
+												<i class="far fa-edit"></i>
 											</a>
-											<a class="btn btn-sm btn-primary" title="Ver"
+											&nbsp;&nbsp;&nbsp;
+											<a class="btn btn-sm btn-info" title="Ver"
 											    th:href="@{/platillo/retrieve/} + ${platillo.idplatillo}">
-												<i class="fas fa-eye"></i>
+												<i class="far fa-id-card"></i>
 											</a>									
 										</div>
 									</td>

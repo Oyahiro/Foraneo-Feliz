@@ -32,7 +32,7 @@ public class PlatilloController {
 	public String create(Model model) {
 		Platillo platillo = new Platillo();
 		model.addAttribute("platillo", platillo);  //El model reemplaza al ViewBag
-		model.addAttribute("tittle", "Registro de nuevo platillo");
+		model.addAttribute("title", "Registrar platillo");
 		List<Restaurante> restaurantes = reservice.findAll();
         model.addAttribute("restaurantes", restaurantes); 
 		return "platillo/form";
@@ -42,7 +42,7 @@ public class PlatilloController {
 	public String retrieve(@PathVariable(value="id") Integer id, Model model) {
 		Platillo platillo = service.findById(id);
 		model.addAttribute("platillo", platillo);
-		model.addAttribute("tittle", "Detalle de platillo");
+		model.addAttribute("title", "Detalle de platillo");
 		return "platillo/card";
 	}
 	
@@ -62,7 +62,7 @@ public class PlatilloController {
 	public String update(@PathVariable(value="id") Integer id, Model model) {
 		Platillo platillo = service.findById(id);
 		model.addAttribute("platillo", platillo);
-		model.addAttribute("title", "Actualizar datos de platillo");
+		model.addAttribute("title", "Actualizar platillo");
 		List<Restaurante> restaurantes = reservice.findAll();
         model.addAttribute("restaurantes", restaurantes); 
 		return "platillo/form";
@@ -72,6 +72,7 @@ public class PlatilloController {
 	public String list(Model model) {
 		List<Platillo> list = service.findAll();
 		model.addAttribute("list", list);
+		model.addAttribute("title", "Lista de platillos");
 		return "platillo/list";
 	}
 	
