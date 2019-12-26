@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -29,24 +29,24 @@ public abstract class Persona {
 		
 	@Column(name="NOMBRES")
 	@Size(max=55)
-	@NotEmpty
+	@NotBlank
 	private  String  nombres;
 	
 	@Column(name="APELLIDOS")
 	@Size(max=55)
-	@NotEmpty
+	@NotBlank
 	private  String apellidos;
 
+	@Column(name="FNACIMIENTO")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@Past
-	@Column(name="FNACIMIENTO")
 	@NotNull
 	private Calendar fNacimiento;
 	
 	@Column(name="CELULAR")
 	@Size(min=10, max=10)
-	@NotEmpty
+	@NotBlank
 	private  String  celular;
 
 	public Persona() {

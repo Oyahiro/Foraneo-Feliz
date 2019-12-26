@@ -30,7 +30,10 @@
 						<div class="content col-sm-6">							
 							<input class="form-control" type="text" 
 								th:field="*{nombre}"
-								th:errorclass="'form-control is-invalid'" />										
+								th:errorclass="'form-control is-invalid'" />
+							<small class="invalid-feedback"
+							th:if="${#fields.hasErrors('nombre')}"
+							th:errors="*{nombre}"></small>										
 						</div>
 					</div>
 									
@@ -42,7 +45,10 @@
 						<div class="content col-sm-6">							
 							<input class="form-control" type="text" 
 								th:field="*{correo}"
-								th:errorclass="'form-control is-invalid'" />										
+								th:errorclass="'form-control is-invalid'" />
+							<small class="invalid-feedback"
+							th:if="${#fields.hasErrors('correo')}"
+							th:errors="*{correo}"></small>									
 						</div>
 					</div>
 					
@@ -52,9 +58,19 @@
 							<label class="h5 col-form-label">&nbsp;Tipo:</label>						
 						</div>
 						<div class="content col-sm-6">							
-							<input class="form-control" type="text" 
-								th:field="*{tipo}"
-								th:errorclass="'form-control is-invalid'" />										
+							<select class="nice-select wide form-control" th:field="*{tipo}" th:errorclass="'form-control is-invalid'">
+								<option value="">---   Tipo   ---</option>
+								<option value="Comida rápida">Comida rápida</option>
+								<option value="Comida rápida">Familiar</option>
+								<option value="No desarrollada">Buffet</option>
+								<option value="De especialidad - China">De especialidad - China</option>
+								<option value="De especialidad - Mexicana">De especialidad - Mexicana</option>
+								<option value="De especialidad - Italiana">De especialidad - Italiana</option>
+								<option value="De especialidad - Pescados y Mariscos">De especialidad - Pescados y Mariscos</option>
+							</select>
+							<small class="invalid-feedback"
+							th:if="${#fields.hasErrors('tipo')}"
+							th:errors="*{tipo}"></small>								
 						</div>
 					</div>
 					
@@ -66,7 +82,10 @@
 						<div class="content col-sm-6">							
 							<input class="form-control"
 								th:field="*{celular}"
-								th:errorclass="'form-control is-invalid'" />										
+								th:errorclass="'form-control is-invalid'" />
+							<small class="invalid-feedback"
+							th:if="${#fields.hasErrors('celular')}"
+							th:errors="*{celular}"></small>									
 						</div>
 					</div>
 					
@@ -78,7 +97,10 @@
 						<div class="content col-sm-6">							
 							<input class="form-control" type="text" 
 								th:field="*{direccion}"
-								th:errorclass="'form-control is-invalid'" />										
+								th:errorclass="'form-control is-invalid'" />
+							<small class="invalid-feedback"
+							th:if="${#fields.hasErrors('direccion')}"
+							th:errors="*{direccion}"></small>									
 						</div>
 					</div>
 					
@@ -90,7 +112,10 @@
 						<div class="content col-sm-6">							
 							<input class="form-control" type="text" 
 								th:field="*{web}"
-								th:errorclass="'form-control is-invalid'" />										
+								th:errorclass="'form-control is-invalid'" />
+							<small class="invalid-feedback"
+							th:if="${#fields.hasErrors('web')}"
+							th:errors="*{web}"></small>										
 						</div>
 					</div>
 										

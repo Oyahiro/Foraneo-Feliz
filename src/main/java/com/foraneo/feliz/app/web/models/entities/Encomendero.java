@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,8 +23,8 @@ public class Encomendero extends Persona implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name="CEDULA")
-	@Size(max=10)
-	@NotEmpty
+	@Size(min=10, max=10)
+	@NotBlank
 	private String cedula;
 	
 	@JsonIgnore

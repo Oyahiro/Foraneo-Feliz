@@ -12,7 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,31 +31,33 @@ public class Restaurante implements Serializable{
 	
 	@Column(name="NOMBRE")
 	@Size(max=25)
-	@NotEmpty
+	@NotBlank
 	private String nombre;
 	
 	@Column(name="DIRECCION")
 	@Size(max=50)
-	@NotEmpty
+	@NotBlank
 	private String direccion;
 	
 	@Column(name="TIPO")
 	@Size(max=20)
-	@NotEmpty
+	@NotBlank
 	private String tipo;
 	
 	@Column(name="CELULAR")
-	@Size(max=15)
-	@NotEmpty
+	@Size(min=10, max=10)
+	@NotBlank
 	private String celular;
 	
 	@Column(name="CORREO")
 	@Size(max=30)
-	@NotEmpty
+	@NotBlank
+	@Email
 	private String correo;
 	
 	@Column(name="WEB")
 	@Size(max=30)
+	@NotBlank
 	private String web;
 	
 	@JsonIgnore

@@ -30,7 +30,10 @@
 						<div class="content col-sm-6">							
 							<input class="form-control" type="text" 
 								th:field="*{cedula}"
-								th:errorclass="'form-control is-invalid'" />										
+								th:errorclass="'form-control is-invalid'" />
+							<small class="invalid-feedback"
+							th:if="${#fields.hasErrors('cedula')}"
+							th:errors="*{cedula}"></small>										
 						</div>
 					</div>
 						
@@ -42,7 +45,10 @@
 						<div class="content col-sm-6">							
 							<input class="form-control" type="text" 
 								th:field="*{nombres}"
-								th:errorclass="'form-control is-invalid'" />										
+								th:errorclass="'form-control is-invalid'" />
+							<small class="invalid-feedback"
+							th:if="${#fields.hasErrors('nombres')}"
+							th:errors="*{nombres}"></small>										
 						</div>
 					</div>
 					
@@ -54,7 +60,10 @@
 						<div class="content col-sm-6">							
 							<input class="form-control" type="text" 
 								th:field="*{apellidos}"
-								th:errorclass="'form-control is-invalid'" />										
+								th:errorclass="'form-control is-invalid'" />
+							<small class="invalid-feedback"
+							th:if="${#fields.hasErrors('apellidos')}"
+							th:errors="*{apellidos}"></small>										
 						</div>
 					</div>
 					
@@ -66,7 +75,10 @@
 						<div class="content col-sm-6">							
 							<input class="form-control"
 								th:field="*{celular}"
-								th:errorclass="'form-control is-invalid'" />										
+								th:errorclass="'form-control is-invalid'" />
+							<small class="invalid-feedback"
+							th:if="${#fields.hasErrors('celular')}"
+							th:errors="*{celular}"></small>										
 						</div>
 					</div>
 					
@@ -78,7 +90,10 @@
 						<div class="content col-sm-6">							
 							<input class="form-control" type="date" 
 								th:field="*{fNacimiento}"
-								th:errorclass="'form-control is-invalid'" />										
+								th:errorclass="'form-control is-invalid'" />
+							<small class="invalid-feedback"
+							th:if="${#fields.hasErrors('fNacimiento')}"
+							th:errors="*{fNacimiento}"></small>										
 						</div>
 					</div>
 										

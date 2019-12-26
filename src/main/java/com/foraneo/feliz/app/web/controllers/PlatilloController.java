@@ -80,11 +80,14 @@ public class PlatilloController {
 	public String save(@Valid Platillo platillo, BindingResult result, Model model, RedirectAttributes flash) {
 		try {
 			if(result.hasErrors()){
-                model.addAttribute("tittle", "Error al Guardar");
+                model.addAttribute("title", "Registrar platillo");
                 List<Restaurante> restaurantes = reservice.findAll();
                 model.addAttribute("restaurantes", restaurantes);
-                return "area/form";
+                return "platillo/form";
             }
+			else {
+				model.addAttribute("title","Actualizar platillo");
+			}
 			service.save(platillo); //El service ya sabe si es nuevo o un antiguo y lo actualiza
 			flash.addFlashAttribute("message", "Registro guardado con éxito");
 		}catch(Exception ex) {
