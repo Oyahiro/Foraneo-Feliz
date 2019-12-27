@@ -15,7 +15,7 @@ public class HomeController {
 
 	@GetMapping(value="/")
 	public String home(Model model) {
-		model.addAttribute("tittle", "Foraneo Felíz");
+		model.addAttribute("title", "Foraneo Felíz");
 		model.addAttribute("description", "Sistema de Pedidos en Línea");
 		return "home";
 	}
