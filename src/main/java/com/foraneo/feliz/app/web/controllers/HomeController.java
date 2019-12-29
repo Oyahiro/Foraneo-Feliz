@@ -15,8 +15,9 @@ public class HomeController {
 
 	@GetMapping(value="/")
 	public String home(Model model) {
+		model.addAttribute("framework", "Spring Boot");
 		model.addAttribute("title", "Foraneo Felíz");
-		model.addAttribute("description", "Sistema de Pedidos en Línea");
+		model.addAttribute("description", "Sistema para promoción de restaurantes que permite la entrega de comida a domicilio.");
 		return "home";
 	}
 	

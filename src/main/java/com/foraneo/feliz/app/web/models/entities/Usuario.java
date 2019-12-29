@@ -14,9 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
-import com.foraneo.feliz.app.web.models.entities.Persona;
-import com.foraneo.feliz.app.web.models.entities.Rol;
-
 @Entity
 @Table(name = "USUARIO")
 public class Usuario extends Persona implements Serializable {
