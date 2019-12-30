@@ -14,4 +14,6 @@ public interface IPlatilloService {
 
 	public List<Platillo>findAll();
 	
+	public List<Platillo> findByRestaurante(Integer id);
+	
 }

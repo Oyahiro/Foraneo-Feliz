@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead"></head>
+<body>
+<div id="wrapper">
+	<div th:replace="layout :: frgNavigation"></div>
+	<div th:replace="layout :: frgHeaderSection"></div>
+	<div id="content-wrapper" class="d-flex flex-column">
+		<!-- Begin Page Content -->
+		<div class="container">
+			<div class="container-fluid">				
+				<br />
+				<div class="card col-md-12">
+					<div class="card-body">
+						<div class="form-group row">
+							<h3 class="card-title col-sm-10" th:text="${title}"></h3>
+						</div>
+						<hr />
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th><i class="fas fa-utensils"></i>&nbsp;Direccion</th>
+									<th><i class="fas fa-coins"></i>&nbsp;Fecha</th>
+									<th><i class="far fa-sticky-note"></i>&nbsp;Total</th>
+									<th><i class="far fa-sticky-note"></i>&nbsp;Estado</th>
+																
+									<th><a class="btn btn-sm btn-success" th:href="@{/pedido/create}" >
+										<i class="fas fa-plus"></i>&nbsp;Nuevo</a>
+									</th>
+								</tr>
+							</thead>
+							<tbody>						
+								<tr th:each="platillo : ${list}" >
+									<td th:text="${pedido.direccion}"></td>
+									<td th:text="${#dates.format(pedido.fecha, 'dd-MMMM-yyyy')}"></td>
+									<td th:text="${pedido.total}"></td>
+									<td th:text="${pedido.estado}"></td>
+									
+									<td>
+										<div class="row">
+											<a class="btn btn-sm btn-warning" title="Editar"
+											   th:href="@{/pedido/update/} + ${pedido.idpedido}">
+												<i class="far fa-edit"></i>
+											</a>
+											&nbsp;&nbsp;&nbsp;
+											<a class="btn btn-sm btn-info" title="Ver"
+											    th:href="@{/pedido/retrieve/} + ${platillo.idpedido}">
+												<i class="far fa-id-card"></i>
+											</a>									
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<br />
+			<br />
+			<footer th:replace="layout :: frgFooter"></footer>
+		</div>
+	</div>
+</div>
+</body>
+</html>

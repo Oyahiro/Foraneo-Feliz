@@ -17,11 +17,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -46,13 +47,12 @@ public class Pedido implements Serializable{
 	
 	@Column(name="DIRECCION")
 	@Size(max=50)
-	@NotEmpty
+	@NotBlank
 	private String direccion;
 	
 	@Column(name="FECHAPEDIDO")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	@NotNull
 	private Calendar fechapedido;
 	
 	@JoinColumn (name="IDENCOMENDERO", referencedColumnName="IDPERSONA")
@@ -63,6 +63,7 @@ public class Pedido implements Serializable{
 	@ManyToOne
 	private Cliente cliente;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="pedido", fetch=FetchType.LAZY)
 	private List<Detalle> detalle;
 

@@ -39,4 +39,19 @@ public class PedidoService implements IPedidoService{
 		return (List<Pedido>)dao.findAll();
 	}
 
+	@Override
+	public List<Pedido> findByCliente(Integer id) {
+		return dao.findByCliente(id);
+	}
+
+	@Override
+	public List<Pedido> findByEstado() {
+		return dao.findByEstado();
+	}
+
+	@Override
+	public List<Pedido> findByClienteyEstado(Integer id) {
+		return dao.findByClienteyEstado(id);
+	}
+
 }

@@ -1,7 +1,6 @@
 package com.foraneo.feliz.app.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -35,8 +34,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/", "/css/**", "/js/**", "/img/**", "/images/**").permitAll()
 		.antMatchers("/cliente/**", "/encomendero/**").hasAnyRole("ADMIN")
 		.antMatchers("/platillo/form", "/restaurante/form").hasAnyRole("ADMIN")
-		.antMatchers("/platillo/list", "/restaurante/list").hasAnyRole("USER")
-		.antMatchers("/platillo/card", "/restaurante/card").hasAnyRole("USER")
+		
+		.antMatchers("/platillo/list", "/restaurante/list").permitAll()
+		.antMatchers("/platillo/card", "/restaurante/card").permitAll()
 		.antMatchers("/usuario/**").permitAll()
 		
 		.anyRequest().authenticated()

@@ -30,7 +30,8 @@
 								<div class="content col-sm-6">							
 									<input class="form-control" type="text" 
 										th:field="*{nombres}"
-										th:errorclass="'form-control is-invalid'" />
+										th:errorclass="'form-control is-invalid'"
+										placeholder="Christian Manuel" />
 									<small class="invalid-feedback"
 									th:if="${#fields.hasErrors('nombres')}"
 									th:errors="*{nombres}"></small>										
@@ -45,7 +46,8 @@
 								<div class="content col-sm-6">							
 									<input class="form-control" type="text" 
 										th:field="*{apellidos}"
-										th:errorclass="'form-control is-invalid'" />
+										th:errorclass="'form-control is-invalid'" 
+										placeholder="Chunga Bayas"/>
 									<small class="invalid-feedback"
 									th:if="${#fields.hasErrors('apellidos')}"
 									th:errors="*{apellidos}"></small>										
@@ -60,7 +62,8 @@
 								<div class="content col-sm-6">							
 									<input class="form-control"
 										th:field="*{celular}"
-										th:errorclass="'form-control is-invalid'" />
+										th:errorclass="'form-control is-invalid'" 
+										placeholder="0999999999"/>
 									<small class="invalid-feedback"
 									th:if="${#fields.hasErrors('celular')}"
 									th:errors="*{celular}"></small>											
@@ -82,28 +85,37 @@
 								</div>
 							</div>
 							
-							<div class="input-group-icon mt-10">
-								<div class="icon">
+							<div class="form-group row">
+								<div class="content col-sm-3">
 									<i class="fas fa-info-circle" aria-hidden="true"></i>
+									<label class="h5 col-form-label">&nbsp;Nombre de usuario:</label>
 								</div>
-								<input type="text" th:field="*{nombre}"
-									placeholder="Nombre de usuario" class="single-input"
-									th:errorclass="'form-control is-invalid'" /> <small
-									class="invalid-feedback"
-									th:if="${#fields.hasErrors('nombre')}"
-									th:errors="*{nombre}"></small>
+								<div class="content col-sm-6">
+									<input class="form-control single-input" type="text"
+										th:field="*{nombre}"
+										th:errorclass="'form-control is-invalid'"
+										placeholder="chris98" />
+										<small class="invalid-feedback"
+										th:if="${#fields.hasErrors('nombre')}"
+										th:errors="*{nombre}"></small>
+								</div>
 							</div>
 
-							<div class="input-group-icon mt-10">
-								<div class="icon">
+							<div class="form-group row">
+								<div class="content col-sm-3">
 									<i class="fas fa-info-circle" aria-hidden="true"></i>
+									<label class="h5 col-form-label">&nbsp;Contrase&ntilde;a:</label>
 								</div>
-								<input type="password" th:field="*{contrasenia}"
-									placeholder="Contrase&ntilde;a" class="single-input"
-									th:errorclass="'form-control is-invalid'" /> <small
-									class="invalid-feedback"
-									th:if="${#fields.hasErrors('contrasenia')}"
-									th:errors="*{contrasenia}"></small>
+								<div class="content col-sm-6">
+									<input class="form-control single-input" type="password" 
+										th:field="*{contrasenia}"
+										th:errorclass="'form-control is-invalid'"
+										placeholder="Soft1998" />
+										<small
+										class="invalid-feedback"
+										th:if="${#fields.hasErrors('contrasenia')}"
+										th:errors="*{contrasenia}"></small>
+								</div>
 							</div>
 										
 							<hr />

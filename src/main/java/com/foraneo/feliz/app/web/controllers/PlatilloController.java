@@ -25,6 +25,7 @@ public class PlatilloController {
 
 	@Autowired //Para crear inyeccion de dependencias entre el controlador y el servicio
 	private IPlatilloService service;
+	
 	@Autowired
 	private IRestauranteService reservice;
 	
@@ -74,6 +75,13 @@ public class PlatilloController {
 		model.addAttribute("list", list);
 		model.addAttribute("title", "Lista de platillos");
 		return "platillo/list";
+	}
+	
+	@GetMapping(value = "/onlylist/{id}")
+	public String onlylist(@PathVariable(value = "id") Integer id, Model model) {
+		List<Platillo> list = service.findByRestaurante(id);
+		model.addAttribute("list", list);
+		return "platillo/onlylist";
 	}
 	
 	@PostMapping(value="save")

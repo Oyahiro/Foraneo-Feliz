@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<br/>
+	<h5>Platillos</h5>
+	<table th:if="${list.size() != 0}" class="table table-hover">
+		<thead>
+			<tr>
+				<th><i class="fas fa-utensils"></i>&nbsp;Nombre</th>
+				<th><i class="far fa-sticky-note"></i>&nbsp;Descripci&oacute;n</th>
+				<th><i class="fas fa-coins"></i>&nbsp;Precio</th>
+				<!--<th></th>-->
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="platillo : ${list}">
+				<td th:text="${platillo.nombre}"></td>
+				<td th:text="${platillo.descripcion}"></td>
+				<td th:text="${platillo.precio}"></td>
+				<!--<td>
+					<div class="li">
+						&nbsp;<a title="Editar" th:onclick="'updateAntecedentePatologicoPersonal(' + ${antecedente.idantecedentepatologico} + ');'"> <i
+							class="fas fa-edit"></i>
+						</a>&nbsp;&nbsp;<a title="Eliminar" th:onclick="'deleteAntecedentePatologicoPersonal(' + ${antecedente.idantecedentepatologico} + ');'">
+							<i class="fas fa-trash"></i>
+						</a>
+					</div>
+
+				</td>-->
+			</tr>
+
+		</tbody>
+	</table>
+
+</body>
+</html>

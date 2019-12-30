@@ -10,102 +10,111 @@
 		<div class="container">
 			<div class="container-fluid">
 				<br />
-
-		<div class="card col-md-12">
-			<div class="card-body">
-				<div class="form-group row">
-					<div class="content col-sm-1">
-						<i class="far fa-id-card fa-2x"></i>
-					</div>
-					<h4 class="card-title col-sm-7"	th:text="${title}"></h4>
-					<div class="col-sm-4">
-						<button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-						<i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
-						<a class="btn btn-primary" th:href="@{/restaurante/list}"><i
-							class="fas fa-arrow-left"></i>&nbsp;Volver</a>
-					</div>
-				</div>
-				<input type="hidden" id="idrestaurante"
-					th:value="${restaurante.idrestaurante}" />
-				<hr />
-				<div class="row">
-					<div class="col-md-12">
+				<div class="card col-md-12">
+					<div class="card-body">
 						<div class="form-group row">
-							<div class="content col-sm-3 bg-light">
-								<i class="fas fa-store-alt"></i> <label class="h5 col-form-label">&nbsp;Nombre:</label>
+							<div class="content col-sm-1">
+								<i class="far fa-id-card fa-2x"></i>
 							</div>
-							<div class="col-sm-8">
-								<h6 class="card-text" th:text="${restaurante.nombre}"></h6>
+							<h4 class="card-title col-sm-7"	th:text="${title}"></h4>
+							<div class="col-sm-4">
+								<button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+								<i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
+								<a class="btn btn-primary" th:href="@{/restaurante/list}"><i
+									class="fas fa-arrow-left"></i>&nbsp;Volver</a>
 							</div>
 						</div>
-						<div class="form-group row">
-							<div class="content col-sm-3 bg-light">
-								<i class="far fa-envelope"></i> <label class="h5 col-form-label">&nbsp;Correo:</label>
-							</div>
-							<div class="col-sm-8">
-								<h6 class="card-text" th:text="${restaurante.correo}"></h6>
+						<input type="hidden" id="idrestaurante"
+							th:value="${restaurante.idrestaurante}" />
+						<hr />
+						<div class="row">
+							<div class="col-md-12">
+								<form th:object="${restaurante}">
+									<input type="hidden" th:field="*{idrestaurante}" />
+								</form>
+								
+								<div class="form-group row">
+									<div class="content col-sm-3 bg-light">
+										<i class="fas fa-store-alt"></i> <label class="h5 col-form-label">&nbsp;Nombre:</label>
+									</div>
+									<div class="col-sm-8">
+										<h6 class="card-text" th:text="${restaurante.nombre}"></h6>
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="content col-sm-3 bg-light">
+										<i class="far fa-envelope"></i> <label class="h5 col-form-label">&nbsp;Correo:</label>
+									</div>
+									<div class="col-sm-8">
+										<h6 class="card-text" th:text="${restaurante.correo}"></h6>
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="content col-sm-3 bg-light">
+										<i class="fas fa-utensils"></i> <label class="h5 col-form-label">&nbsp;Tipo:</label>
+									</div>
+									<div class="col-sm-8">
+										<h6 class="card-text" th:text="${restaurante.tipo}"></h6>
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="content col-sm-3 bg-light">
+										<i class="fas fa-mobile-alt"></i> <label class="h5 col-form-label">&nbsp;Celular:</label>
+									</div>
+									<div class="col-sm-8">
+										<h6 class="card-text" th:text="${restaurante.celular}"></h6>
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="content col-sm-3 bg-light">
+										<i class="fas fa-route"></i> <label class="h5 col-form-label">&nbsp;Direccion:</label>
+									</div>
+									<div class="col-sm-8">
+										<h6 class="card-text" th:text="${restaurante.direccion}"></h6>
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="content col-sm-3 bg-light">
+										<i class="far fa-window-restore"></i> <label class="h5 col-form-label">&nbsp;Sitio web:</label>
+									</div>
+									<div class="col-sm-8">
+										<h6 class="card-text" th:text="${restaurante.web}"></h6>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="form-group row">
-							<div class="content col-sm-3 bg-light">
-								<i class="fas fa-utensils"></i> <label class="h5 col-form-label">&nbsp;Tipo:</label>
-							</div>
-							<div class="col-sm-8">
-								<h6 class="card-text" th:text="${restaurante.tipo}"></h6>
-							</div>
+						
+						<!-- Lista de platillos -->
+						<div class="container" id="ctnPlatillos">
 						</div>
-						<div class="form-group row">
-							<div class="content col-sm-3 bg-light">
-								<i class="fas fa-mobile-alt"></i> <label class="h5 col-form-label">&nbsp;Celular:</label>
-							</div>
-							<div class="col-sm-8">
-								<h6 class="card-text" th:text="${restaurante.celular}"></h6>
-							</div>
-						</div>
-						<div class="form-group row">
-							<div class="content col-sm-3 bg-light">
-								<i class="fas fa-route"></i> <label class="h5 col-form-label">&nbsp;Direccion:</label>
-							</div>
-							<div class="col-sm-8">
-								<h6 class="card-text" th:text="${restaurante.direccion}"></h6>
-							</div>
-						</div>
-						<div class="form-group row">
-							<div class="content col-sm-3 bg-light">
-								<i class="far fa-window-restore"></i> <label class="h5 col-form-label">&nbsp;Sitio web:</label>
-							</div>
-							<div class="col-sm-8">
-								<h6 class="card-text" th:text="${restaurante.web}"></h6>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="deleteModal" class="modal" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">¿Desea eliminar el restaurante?</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<p th:text="${restaurante.nombre}"></p>
-					</div>
-					<div class="modal-footer">						
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-						<a th:href="@{/restaurante/delete/} + ${restaurante.idrestaurante}" class="btn btn-success">Confirmar</a>
+						
 					</div>
 				</div>
-			</div>
-		</div>
+				<div id="deleteModal" class="modal" tabindex="-1" role="dialog">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">¿Desea eliminar el restaurante?</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p th:text="${restaurante.nombre}"></p>
+							</div>
+							<div class="modal-footer">						
+								<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+								<a th:href="@{/restaurante/delete/} + ${restaurante.idrestaurante}" class="btn btn-success">Confirmar</a>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<br />
 			<br />
 			<footer th:replace="layout :: frgFooter"></footer>
+			<script th:src="@{/js/restaurante-card.js}"></script>
 		</div>
 	</div>
 </div>

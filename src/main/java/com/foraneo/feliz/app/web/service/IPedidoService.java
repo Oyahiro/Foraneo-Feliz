@@ -14,4 +14,10 @@ public interface IPedidoService {
 
 	public List<Pedido>findAll();
 	
+	public List<Pedido> findByCliente(Integer id);
+	
+	public List<Pedido> findByEstado();
+	
+	public List<Pedido> findByClienteyEstado(Integer id);
+	
 }

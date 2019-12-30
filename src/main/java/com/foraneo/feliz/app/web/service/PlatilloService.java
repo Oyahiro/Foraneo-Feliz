@@ -39,4 +39,9 @@ public class PlatilloService implements IPlatilloService{
 		return (List<Platillo>)dao.findAll();
 	}
 
+	@Override
+	public List<Platillo> findByRestaurante(Integer id) {
+		return dao.findByRestaurante(id);
+	}
+
 }
