@@ -38,15 +38,15 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ml-auto">
             
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="isAuthenticated()">
             	<a class="nav-link js-scroll-trigger" th:href="@{/pedido/list}">Pedido</a>
             </li>
             
-            <li class="nav-item">
+            <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
             	<a class="nav-link js-scroll-trigger" th:href="@{/cliente/list}">Cliente</a>
             </li>
 			
-			<li class="nav-item">
+			<li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
 				<a class="nav-link js-scroll-trigger" th:href="@{/encomendero/list}">Encomendero</a>
 			</li>
 					
@@ -306,7 +306,7 @@
         <div class="container">
 	      <div class="row align-items-center">
 	        <div class="col-md-4">
-	          <span class="copyright">Copyright &copy; Your Website 2019</span>
+	          <span class="copyright" style="color:#FFFFFF">Copyright &copy; Your Website 2019</span>
 	        </div>
 	        <div class="col-md-4">
 	          <ul class="list-inline social-buttons">
@@ -331,9 +331,6 @@
 	          <ul class="list-inline quicklinks">
 	            <li class="list-inline-item">
 	              <a href="#">Cont&aacute;ctanos</a>
-	            </li>
-	            <li class="list-inline-item">
-	              <a href="#">Recursos</a>
 	            </li>
 	          </ul>
 	        </div>

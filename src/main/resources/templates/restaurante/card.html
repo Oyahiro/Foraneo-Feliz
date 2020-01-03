@@ -18,9 +18,15 @@
 							</div>
 							<h4 class="card-title col-sm-7"	th:text="${title}"></h4>
 							<div class="col-sm-4">
-								<button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+								<button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+								th:if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'')')}">
 								<i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
-								<a class="btn btn-primary" th:href="@{/restaurante/list}"><i
+								
+								<button class="btn btn-warning" data-toggle="modal" data-target="#deleteModal"
+								th:if="${#authorization.expression('hasAnyRole(''ROLE_RESTAURANTE'')')}">
+								<i class="far fa-edit"></i>&nbsp;Editar</button>
+								
+								<a class="btn btn-info" th:href="@{/restaurante/list}"><i
 									class="fas fa-arrow-left"></i>&nbsp;Volver</a>
 							</div>
 						</div>

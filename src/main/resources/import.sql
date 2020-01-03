@@ -6,8 +6,9 @@ INSERT INTO CLIENTE (IDPERSONA, NOMBRES,  APELLIDOS, CORREO, FNACIMIENTO, FREGIS
 INSERT INTO CLIENTE (IDPERSONA, NOMBRES,  APELLIDOS, CORREO, FNACIMIENTO, FREGISTRO, CELULAR) VALUES (2, 'Paola Alexandra', 'Zambrano De La Cruz', 'pazambrano@espe.edu.ec', '1998-08-17', '1998-08-17', '0000000000')
 INSERT INTO CLIENTE (IDPERSONA, NOMBRES,  APELLIDOS, CORREO, FNACIMIENTO, FREGISTRO, CELULAR) VALUES (3, 'Juan Alexis', 'Regato Rosero', 'jaregato@espe.edu.ec', '1998-01-01', '1998-01-01', '0000000000')
 
-INSERT INTO RESTAURANTE (IDRESTAURANTE, NOMBRE,  CELULAR, CORREO, DIRECCION, TIPO, WEB) VALUES (1, 'Food Station', '0999999999', 'foodstation@outlook.es', 'Av. Unidad Nacional', 'Comida rapida', 'www.foodstation.com')
+INSERT INTO RESTAURANTE (IDRESTAURANTE, NOMBRE,  CELULAR, CORREO, DIRECCION, TIPO, WEB) VALUES (1, 'El Foraneo Feliz', '0983187623', 'pao.zambranoo_@hotmail.com', 'Latacunga', 'Comida rapida', 'www.foraneofeliz.com')
 INSERT INTO RESTAURANTE (IDRESTAURANTE, NOMBRE,  CELULAR, CORREO, DIRECCION, TIPO, WEB) VALUES (2, 'Pio Pio', '0999999999', 'pio_pio@outlook.es', 'Av. Unidad Nacional', 'Comida rapida', 'www.piopio.com')
+INSERT INTO RESTAURANTE (IDRESTAURANTE, NOMBRE,  CELULAR, CORREO, DIRECCION, TIPO, WEB) VALUES (3, 'Food Station', '0999999999', 'foodstation@outlook.es', 'Av. Unidad Nacional', 'Comida rapida', 'www.foodstation.com')
 
 INSERT INTO PLATILLO (IDPLATILLO, NOMBRE,  DESCRIPCION, PRECIO, IDRESTAURANTE) VALUES (1, 'Cordon bleu', 'Pollo relleno con jamon y queso maduro', 5.50, 1)
 INSERT INTO PLATILLO (IDPLATILLO, NOMBRE,  DESCRIPCION, PRECIO, IDRESTAURANTE) VALUES (2, 'Pollo a las finas hierbas', 'Pollo al horno con variedad de hierbas', 4.75, 2)

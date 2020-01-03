@@ -19,7 +19,8 @@
 					</div>
 					<h4 class="card-title col-sm-7"	th:text="${title}"></h4>
 					<div class="col-sm-4">
-						<button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+						<button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+								th:if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_USER'')')}">
 						<i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
 						<a class="btn btn-primary" th:href="@{/platillo/list}"><i
 							class="fas fa-arrow-left"></i>&nbsp;Volver</a>

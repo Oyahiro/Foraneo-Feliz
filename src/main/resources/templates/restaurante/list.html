@@ -24,7 +24,8 @@
 									<th><i class="fas fa-mobile-alt"></i>&nbsp;Celular</th>
 									<th><i class="fas fa-utensils"></i>&nbsp;Tipo</th>
 																
-									<th><a class="btn btn-sm btn-success" th:href="@{/restaurante/create}" >
+									<th><a class="btn btn-sm btn-success" th:href="@{/restaurante/create}"
+										th:if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'')')}">
 										<i class="fas fa-plus"></i>&nbsp;Nuevo</a>
 									</th>
 								</tr>
@@ -39,7 +40,8 @@
 									<td>
 										<div class="row">
 											<a class="btn btn-sm btn-warning" title="Editar"
-											   th:href="@{/restaurante/update/} + ${restaurante.idrestaurante}">
+											   th:href="@{/restaurante/update/} + ${restaurante.idrestaurante}"
+											   th:if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'')')}">
 												<i class="far fa-edit"></i>
 											</a>
 											&nbsp;&nbsp;&nbsp;

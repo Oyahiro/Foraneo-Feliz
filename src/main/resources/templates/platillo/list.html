@@ -23,7 +23,8 @@
 									<th><i class="fas fa-coins"></i>&nbsp;Precio</th>
 									<th><i class="far fa-sticky-note"></i>&nbsp;Descripcion</th>
 																
-									<th><a class="btn btn-sm btn-success" th:href="@{/platillo/create}" >
+									<th><a class="btn btn-sm btn-success" th:href="@{/platillo/create}"
+									th:if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_RESTAURANTE'')')}">
 										<i class="fas fa-plus"></i>&nbsp;Nuevo</a>
 									</th>
 								</tr>
@@ -37,7 +38,8 @@
 									<td>
 										<div class="row">
 											<a class="btn btn-sm btn-warning" title="Editar"
-											   th:href="@{/platillo/update/} + ${platillo.idplatillo}">
+											   th:href="@{/platillo/update/} + ${platillo.idplatillo}"
+											   th:if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_RESTAURANTE'')')}">
 												<i class="far fa-edit"></i>
 											</a>
 											&nbsp;&nbsp;&nbsp;
