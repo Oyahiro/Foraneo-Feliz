@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.Transient;
+
 import com.sun.istack.NotNull;
 
 @Entity
@@ -31,18 +33,24 @@ public class Detalle implements Serializable{
 	
 	@Column(name="TOTALINDIVIDUAL")
 	private Float totalindividual;
-	@NotNull
-	@JoinColumn (name="IDPEDIDO", referencedColumnName="IDPEDIDO")
-	@ManyToOne
-	private Pedido pedido;
 	
 	@JoinColumn (name="IDPLATILLO", referencedColumnName="IDPLATILLO")
 	@ManyToOne
 	private Platillo platillo;
 
+	@Transient
+	private Integer platilloid;
+	
+	public Integer getPlatilloid() {
+		return platilloid;
+	}
+
+	public void setPlatilloid(Integer platilloid) {
+		this.platilloid = platilloid;
+	}
+
 	public Detalle() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getIddetalle() {
@@ -67,14 +75,6 @@ public class Detalle implements Serializable{
 
 	public void setTotalindividual(Float totalindividual) {
 		this.totalindividual = totalindividual;
-	}
-
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
 	}
 
 	public Platillo getPlatillo() {

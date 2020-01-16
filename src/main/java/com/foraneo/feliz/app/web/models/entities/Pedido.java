@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,12 +18,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -63,13 +64,15 @@ public class Pedido implements Serializable{
 	@ManyToOne
 	private Cliente cliente;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="pedido", fetch=FetchType.LAZY)
-	private List<Detalle> detalle;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name= "IDPEDIDO")
+	private List<Detalle> detalles;
 
+	@Transient
+	private int personaid;
+	
 	public Pedido() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getIdpedido() {
@@ -128,11 +131,20 @@ public class Pedido implements Serializable{
 		this.cliente = cliente;
 	}
 
-	public List<Detalle> getDetalle() {
-		return detalle;
+	public List<Detalle> getDetalles() {
+		return detalles;
 	}
 
-	public void setDetalle(List<Detalle> detalle) {
-		this.detalle = detalle;
+	public void setDetalles(List<Detalle> detalles) {
+		this.detalles = detalles;
+	}
+
+	//Transient
+	public int getPersonaid() {
+		return personaid;
+	}
+
+	public void setPersonaid(int personaid) {
+		this.personaid = personaid;
 	}
 }

@@ -38,11 +38,10 @@ public class Cliente extends Persona implements Serializable{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="cliente", fetch=FetchType.LAZY)
-	private List<Pedido> pedido;
+	private List<Pedido> pedidos;
 
 	public Cliente() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getCorreo() {
@@ -59,5 +58,13 @@ public class Cliente extends Persona implements Serializable{
 
 	public void setfRegistro(Calendar fRegistro) {
 		this.fRegistro = fRegistro;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 }
