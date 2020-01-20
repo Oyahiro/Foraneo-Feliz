@@ -20,86 +20,24 @@
 				</div>
 				<hr />
 				
-				<form th:action="@{/platillo/save}" th:object="${platillo}" method="post">
+				<form th:action="@{/pedido/save}" th:object="${pedido}" method="post">
 						
 					<div class="form-group row">
 						<div class="content col-sm-3">
-							<i class="fas fa-utensils"></i>
-							<label class="h5 col-form-label">&nbsp;Nombre:</label>						
+							<i class="fas fa-street-view"></i>
+							<label class="h5 col-form-label">&nbsp;Direccion:</label>						
 						</div>
 						<div class="content col-sm-6">							
 							<input class="form-control" type="text" 
-								th:field="*{nombre}"
+								th:field="*{direccion}"
 								th:errorclass="'form-control is-invalid'" />
 							<small class="invalid-feedback"
-							th:if="${#fields.hasErrors('nombre')}"
-							th:errors="*{nombre}"></small>											
+							th:if="${#fields.hasErrors('direccion')}"
+							th:errors="*{direccion}"></small>											
 						</div>
 					</div>
 									
-					<div class="form-group row">
-						<div class="content col-sm-3">
-							<i class="fas fa-coins"></i>
-							<label class="h5 col-form-label">&nbsp;Precio:</label>						
-						</div>
-						<div class="content col-sm-6">							
-							<input class="form-control" type="number" step=".01"
-								th:field="*{precio}"
-								th:errorclass="'form-control is-invalid'" />
-							<small class="invalid-feedback"
-							th:if="${#fields.hasErrors('precio')}"
-							th:errors="*{precio}"></small>									
-						</div>
-					</div>
 					
-					<div class="form-group row">
-						<div class="content col-sm-3">
-							<i class="far fa-sticky-note"></i>
-							<label class="h5 col-form-label">&nbsp;Descripci&oacute;n:</label>						
-						</div>
-						<div class="content col-sm-6">							
-							<textarea class="form-control" placeholder="Descripci&oacute;n"
-								th:field="*{descripcion}"
-								th:errorclass="'form-control is-invalid'"></textarea>
-							<small class="invalid-feedback"
-							th:if="${#fields.hasErrors('descripcion')}"
-							th:errors="*{descripcion}"></small>											
-						</div>
-					</div>
-					
-					<div class="form-group row">
-						<div class="content col-sm-3">
-							<i class="fas fa-info-circle"></i>
-							<label class="h5 col-form-label">&nbsp;Restaurante:</label>						
-						</div>
-						<div class="content col-sm-6">							
-							<select class="form-control" th:field="*{restaurante.idrestaurante}">
-								<option value=0>--Seleccione--</option>
-								<option th:each="r : ${restaurantes}" 
-								th:value="${r.idrestaurante}"
-								th:text="${r.nombre}"
-								th:selected="${platillo.restaurante.idrestaurante == r.idrestaurante}"></option>
-							</select>
-								
-								<small class="invalid-feedback"
-								th:if="${#fields.hasErrors('restaurante.idrestaurante')}"
-								th:errors="*{restaurante.idrestaurante}"
-								></small>									
-						</div>
-					</div>
-					
-					<hr />
-					<div class="form-group row">
-						<div class="col-sm-4">
-							<a class="btn btn-danger" 
-								th:href="@{/platillo/list}">
-							<i class="fas fa-minus-circle"></i>&nbsp;Cancelar</a>
-							<button class="btn btn-success" type="submit">
-								<i class="fas fa-plus-circle"></i>&nbsp;Guardar
-							</button>
-						</div>
-					</div>
-					<input type="hidden" th:field="*{idplatillo}"/>
 
 				</form>
 			</div>

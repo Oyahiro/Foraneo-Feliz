@@ -96,7 +96,33 @@
 									th:errors="*{fNacimiento}"></small>											
 								</div>
 							</div>
-												
+							
+							<div class="form-group row">
+								<div class="content col-sm-3">
+									<i class="fas fa-info-circle" aria-hidden="true"></i>
+									<label class="h5 col-form-label">&nbsp;Nombre de usuario:</label>
+								</div>
+								<div class="content col-sm-6">
+									<input class="form-control single-input" type="text"
+										th:field="*{user.nombre}"
+										th:errorclass="'form-control is-invalid'"
+										placeholder="chris98" />
+								</div>
+							</div>
+							
+							<div class="form-group row">
+								<div class="content col-sm-3">
+									<i class="fas fa-info-circle" aria-hidden="true"></i>
+									<label class="h5 col-form-label">&nbsp;Contrase&ntilde;a:</label>
+								</div>
+								<div class="content col-sm-6">
+									<input class="form-control single-input" type="password" 
+										th:field="*{user.contrasenia}"
+										th:errorclass="'form-control is-invalid'"
+										placeholder="Soft1998" />
+								</div>
+							</div>
+							
 							<hr />
 							<div class="form-group row">
 								<div class="col-sm-4">

@@ -40,7 +40,7 @@ public class UsuarioController {
 		try {
 			if(result.hasErrors())
 			{
-				if(usuario.getIdPersona() == null) {
+				if(usuario.getCliente().getIdPersona() == null) {
 					model.addAttribute("title","Nuevo registro");					
 				}
 				else {

@@ -5,20 +5,31 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "USUARIO")
-public class Usuario extends Persona implements Serializable {
+public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name="IDUSUARIO")
+	private  Integer idusuario;
 	
 	@Column(name="NOMBRE", unique = true)	
 	private String nombre;
@@ -36,6 +47,16 @@ public class Usuario extends Persona implements Serializable {
 	@JoinColumn(name= "IDUSUARIO")
 	private List<Rol> roles;
 		
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	private Cliente cliente;
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	public List<Rol> getRoles() {
 		if(roles == null)
@@ -49,11 +70,6 @@ public class Usuario extends Persona implements Serializable {
 
 	public Usuario() {
 		super();
-	}
-	
-	public Usuario(Integer id) {
-		super();
-		this.setIdPersona(id);
 	}
 	
 	public String getNombre() {
@@ -78,6 +94,14 @@ public class Usuario extends Persona implements Serializable {
 
 	public void setHabilitado(Boolean habilitado) {
 		this.habilitado = habilitado;
+	}
+
+	public Integer getIdusuario() {
+		return idusuario;
+	}
+
+	public void setIdusuario(Integer idusuario) {
+		this.idusuario = idusuario;
 	}
 
 	public Calendar getCreadoEn() {

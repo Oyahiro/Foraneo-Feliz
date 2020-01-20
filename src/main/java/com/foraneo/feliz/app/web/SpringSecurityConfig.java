@@ -32,10 +32,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	public void configure(HttpSecurity http) throws Exception{
 		http.authorizeRequests()
 		.antMatchers("/", "/css/**", "/js/**", "/img/**", "/images/**").permitAll()
-		.antMatchers("/cliente/**", "/encomendero/**").hasAnyRole("ADMIN")
+		
+		.antMatchers("/cliente/**", "/encomendero/**").permitAll()
 		.antMatchers("/platillo/**", "/restaurante/**").permitAll()
 		
-		/*.antMatchers("/platillo/form", "/restaurante/form").hasAnyRole("ADMIN", "RESTAURANTE")
+		/*.antMatchers("/cliente/**", "/encomendero/**").hasAnyRole("ADMIN")
+		.antMatchers("/platillo/**", "/restaurante/**").permitAll()
+		
+		.antMatchers("/platillo/form", "/restaurante/form").hasAnyRole("ADMIN", "RESTAURANTE")
 		.antMatchers("/platillo/list", "/restaurante/list").permitAll()
 		.antMatchers("/platillo/card", "/restaurante/card").permitAll()*/
 		
