@@ -33,15 +33,32 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests()
 		.antMatchers("/", "/css/**", "/js/**", "/img/**", "/images/**").permitAll()
 		
-		.antMatchers("/cliente/**", "/encomendero/**").permitAll()
-		.antMatchers("/platillo/**", "/restaurante/**").permitAll()
+		/*.antMatchers("/cliente/**").permitAll()
+		.antMatchers("/platillo/**").permitAll()
+		.antMatchers("/encomendero/**").permitAll()
+		.antMatchers("/restaurante/**").permitAll()
+		.antMatchers("/pedido/**").permitAll()*/
 		
-		/*.antMatchers("/cliente/**", "/encomendero/**").hasAnyRole("ADMIN")
-		.antMatchers("/platillo/**", "/restaurante/**").permitAll()
+		.antMatchers("/platillo/create").hasAnyRole("ADMIN", "RESTAURANTE")
+		.antMatchers("/platillo/list").permitAll()
+		.antMatchers("/platillo/onlylist/**").permitAll()
+		.antMatchers("/platillo/retrieve/**").permitAll()
 		
-		.antMatchers("/platillo/form", "/restaurante/form").hasAnyRole("ADMIN", "RESTAURANTE")
-		.antMatchers("/platillo/list", "/restaurante/list").permitAll()
-		.antMatchers("/platillo/card", "/restaurante/card").permitAll()*/
+		.antMatchers("/restaurante/create").hasAnyRole("ADMIN")
+		.antMatchers("/restaurante/list").permitAll()
+		.antMatchers("/restaurante/retrieve/**").permitAll()
+		
+		.antMatchers("/cliente/create").anonymous()
+		.antMatchers("/cliente/list").hasAnyRole("ADMIN")
+		.antMatchers("/cliente/retrieve/**").hasAnyRole("ADMIN")
+		
+		.antMatchers("/encomendero/create").hasAnyRole("ADMIN")
+		.antMatchers("/encomendero/list").hasAnyRole("ADMIN")
+		.antMatchers("/encomendero/retrieve/**").hasAnyRole("ADMIN")
+		
+		.antMatchers("/pedido/create").hasAnyRole("USER")
+		.antMatchers("/pedido/list").hasAnyRole("ENCOMENDERO", "USER")
+		.antMatchers("/pedido/retrieve/**").hasAnyRole("ENCOMENDERO", "USER")
 		
 		.antMatchers("/usuario/**").permitAll()
 		
