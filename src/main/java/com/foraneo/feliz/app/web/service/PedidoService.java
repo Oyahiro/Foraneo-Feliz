@@ -44,7 +44,7 @@ public class PedidoService implements IPedidoService{
 		return dao.findByCliente(id);
 	}
 
-	@Override
+	/*@Override
 	public List<Pedido> findByEstado() {
 		return dao.findByEstado();
 	}
@@ -52,6 +52,6 @@ public class PedidoService implements IPedidoService{
 	@Override
 	public List<Pedido> findByClienteyEstado(Integer id) {
 		return dao.findByClienteyEstado(id);
-	}
+	}*/
 
 }

@@ -49,15 +49,12 @@ public class PedidoController {
 	public String create(Model model) {
 		Pedido pedido = new Pedido();
 		
-		//List<Cliente> clientes = srvCliente.findAll();
 		List<Platillo> platillos = srvPlatillo.findAll();
 		
 		model.addAttribute("title", "Nuevo registro de pedido");
 		model.addAttribute("pedido", pedido);  //El model reemplaza al ViewBag
 		
-		//model.addAttribute("clientes", clientes);
 		model.addAttribute("platillos", platillos);	
-		
 		model.addAttribute("detalles", new ArrayList<Detalle>());
 		
 		return "pedido/form";
@@ -94,9 +91,38 @@ public class PedidoController {
 	
 	@GetMapping(value="/list")
 	public String list(Model model) {
-		List<Pedido> list = srvPedido.findAll();
-		model.addAttribute("list", list);
-		return "pedido/list";
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		Usuario usuario = srvUsuario.findByUsername(userDetail.getUsername());
+		String rol = usuario.getRoles().get(0).getNombre();
+		List<Pedido> list = null;
+		model.addAttribute("title", "Lista de pedidos");
+		
+		switch(rol) {
+			case "ROLE_USER":
+				list = srvPedido.findByCliente(usuario.getCliente().getIdPersona());
+				model.addAttribute("list", list);
+				return "pedido/list";
+			
+			/*case "ROLE_RESTAURANTE":
+				List<Pedido> list = srvPedido.findByClienteyEstado(usuario.getCliente().getIdPersona());
+				model.addAttribute("list", list);
+				return "pedido/list";
+				
+			case "ROLE_ENCOMENDERO":
+				list = srvPedido.findByEstado();
+				model.addAttribute("list", list);
+				return "pedido/list";
+				
+			case "ROLE_ADMIN":
+				list = srvPedido.findAll();
+				model.addAttribute("list", list);
+				return "pedido/list";
+			*/
+			default:
+				model.addAttribute("list", list);
+				return "pedido/list";
+		}
 	}
 	
 	@PostMapping(value="save")
@@ -104,11 +130,6 @@ public class PedidoController {
 			@SessionAttribute(value="detalles") List<Detalle> detalles, SessionStatus session) {
 		try {
 			if(result.hasErrors()) {
-				System.out.println("************ hasErrores ************");
-				System.out.println("Direccion: " + pedido.getDireccion());
-				System.out.println("Error 0: " + result.getAllErrors().get(0).getDefaultMessage());
-				
-				System.out.println("Detalle: " + detalles.get(0).getPlatillo().getNombre());
 				return "pedido/form";
 			}
 
@@ -120,15 +141,6 @@ public class PedidoController {
 			pedido.setTotal(0f);
 			pedido.setDetalles(detalles);
 			pedido.setCliente(cliente);
-			
-			System.out.println("ID: " + pedido.getIdpedido());
-			System.out.println("Estado: " + pedido.getEstado());
-			System.out.println("Total: " + pedido.getTotal());
-			System.out.println("Direccion: " + pedido.getDireccion());
-			System.out.println("Fecha: " + pedido.getFechapedido());
-			
-			System.out.println("Cliente: " + pedido.getCliente().getNombres());
-			System.out.println("Detalle: " + pedido.getDetalles().get(0).getPlatillo().getNombre());
 			
 			srvPedido.save(pedido);
 			session.setComplete();
