@@ -25,8 +25,6 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.sun.istack.NotNull;
-
 @Entity
 @Table(name="PEDIDO")
 public class Pedido implements Serializable{
@@ -40,11 +38,9 @@ public class Pedido implements Serializable{
 	private Integer idpedido;
 	
 	@Column(name="ESTADO")
-	@NotNull
 	private Boolean estado;
 	
 	@Column(name="TOTAL")
-	@NotNull
 	private Float total;
 	
 	@Column(name="DIRECCION")
@@ -71,6 +67,9 @@ public class Pedido implements Serializable{
 
 	@Transient
 	private int personaid;
+	
+	@Transient
+	private int nuser;
 	
 	public Pedido() {
 		super();
@@ -154,4 +153,12 @@ public class Pedido implements Serializable{
         estado = false;
         fechapedido = Calendar.getInstance();
     }
+	
+	//Funciones Adicionales
+	public String estadoPedido() {
+		if(this.estado)
+			return "Atendido";
+		else
+	       return "No atendido";
+	}
 }

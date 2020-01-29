@@ -52,4 +52,9 @@ public class UsuarioService implements UserDetailsService {
 	public List<Usuario> findAll(){		
 		return (List<Usuario>) dao.findAll();
 	}
+	
+	@Transactional
+	public Usuario findByUsername(String username){		
+		return dao.findByNombre(username);
+	}
 }

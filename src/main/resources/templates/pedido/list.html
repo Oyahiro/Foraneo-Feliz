@@ -30,11 +30,11 @@
 								</tr>
 							</thead>
 							<tbody>						
-								<tr th:each="platillo : ${list}" >
+								<tr th:each="pedido : ${list}" >
 									<td th:text="${pedido.direccion}"></td>
-									<td th:text="${#dates.format(pedido.fecha, 'dd-MMMM-yyyy')}"></td>
+									<td th:text="${#dates.format(pedido.fechapedido, 'dd-MMMM-yyyy')}"></td>
 									<td th:text="${pedido.total}"></td>
-									<td th:text="${pedido.estado}"></td>
+									<td th:text="${pedido.estadoPedido()}"></td>
 									
 									<td th:if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_USER'')')}">
 										<div class="row">
@@ -44,7 +44,7 @@
 											</a>
 											&nbsp;&nbsp;&nbsp;
 											<a class="btn btn-sm btn-info" title="Ver"
-											    th:href="@{/pedido/retrieve/} + ${platillo.idpedido}">
+											    th:href="@{/pedido/retrieve/} + ${pedido.idpedido}">
 												<i class="far fa-id-card"></i>
 											</a>									
 										</div>

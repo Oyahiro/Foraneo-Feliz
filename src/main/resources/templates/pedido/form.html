@@ -2,52 +2,124 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout :: frgHead"></head>
 <body>
-<div id="wrapper">
-	<div th:replace="layout :: frgNavigation"></div>
-	<div th:replace="layout :: frgHeaderSection"></div>
-	<div id="content-wrapper" class="d-flex flex-column">
-		<!-- Begin Page Content -->
-		<div class="container">
-			<div class="container-fluid">			
-				<br />
-		<div class="card col-md-12">
-			<div class="card-body">
-				<div class="form-group row">
-					<div class="content col-sm-1">
-						<i class="fas fa-utensils fa-2x"></i>
-					</div>
-					<h4 class="card-title col-sm-10" th:text="${title}"></h4>					
-				</div>
-				<hr />
-				
-				<form th:action="@{/pedido/save}" th:object="${pedido}" method="post">
-						
+	<div id="wrapper">
+		<div th:replace="layout :: frgNavigation"></div>
+		<div th:replace="layout :: frgHeaderSection"></div>
+		<div id="content-wrapper" class="d-flex flex-column">
+			<!-- Begin Page Content -->
+			<div class="container">
+				<div class="container-fluid">			
+					<br />
+			<div class="card col-md-12">
+				<div class="card-body">
 					<div class="form-group row">
-						<div class="content col-sm-3">
-							<i class="fas fa-street-view"></i>
-							<label class="h5 col-form-label">&nbsp;Direccion:</label>						
+						<div class="content col-sm-1">
+							<i class="fas fa-utensils fa-2x"></i>
 						</div>
-						<div class="content col-sm-6">							
-							<input class="form-control" type="text" 
-								th:field="*{direccion}"
-								th:errorclass="'form-control is-invalid'" />
-							<small class="invalid-feedback"
-							th:if="${#fields.hasErrors('direccion')}"
-							th:errors="*{direccion}"></small>											
-						</div>
+						<h4 class="card-title col-sm-10" th:text="${title}"></h4>					
 					</div>
-									
+					<hr />
 					
-
-				</form>
+					<form th:action="@{/pedido/save}" th:object="${pedido}" method="post">
+						
+						<input type="hidden" th:field="*{personaid}" />
+						
+						<!--  
+						<div class="form-group row">
+							<div class="content col-sm-3">
+								<i class="fas fa-utensils"></i>
+								<label class="h5 col-form-label">&nbsp;Usuario:</label>						
+							</div>
+							<div class="content col-sm-6">
+							<select class="nice-select wide form-control" th:field="*{cliente}">
+									<option value="0">-- Seleccione --</option>
+									<option th:each="cli : ${clientes}" th:value="${cli}"
+										th:text="${cli.nombres}"
+										th:selected="${cliente == cli}"></option>
+								</select>											
+							</div>
+						</div>
+							-->
+							
+						<div class="form-group row">
+							<div class="content col-sm-3">
+								<i class="fas fa-street-view"></i>
+								<label class="h5 col-form-label">&nbsp;Direccion:</label>						
+							</div>
+							<div class="content col-sm-6">							
+								<input class="form-control" type="text" 
+									th:field="*{direccion}"
+									th:errorclass="'form-control is-invalid'" />
+								<small class="invalid-feedback"
+								th:if="${#fields.hasErrors('direccion')}"
+								th:errors="*{direccion}"></small>											
+							</div>
+						</div>
+										
+						<br>
+						<table id="tblAgregarDetalle">
+							<thead>
+								<tr>
+									<td>Platillo</td>
+									<td>Cantidad</td>
+									<td></td>
+								</tr>
+							</thead>				
+							<tbody>
+								<tr>
+									<td>
+										<select class="nice-select wide form-control" id="cmbTipo" name="cmbTipo" >
+										<option value="0">-- Seleccione --</option>
+										<option th:each="platillo : ${platillos}" th:value="${platillo.idplatillo}"
+											th:text="${platillo.nombre}"></option>
+									</select>										
+									</td>																						
+																																		
+									<td>
+											<input placeholder="Ingrese la cantidad" name="txtCantidad" id="txtCantidad" type="text" class="single-input form-control" />										
+									</td>
+									<td>
+									<button type="button" id="btnAgregar" class="btn btn-sm btn-success"><i class="fas fa-plus"></i></button>
+									</td>
+								</tr>										
+							</tbody>				
+						</table>
+						<br>
+						<table class="table ">	
+						<thead>
+								<tr>
+									<td>Platillo</td>
+									<td>Precio</td>
+									<td>Cantidad</td>
+									<td>Total</td>
+									<td></td>
+								</tr>
+							</thead>		
+							<tbody id="tblDetalle">
+							</tbody>								
+						</table>
+						
+						<div class="form-group row">
+							<div class="col-sm-4">
+								<a class="btn btn-danger" th:href="@{/pedido/list}">Cancelar</a>
+								<input type="submit" class="btn btn-success" value="Pedir" />
+							</div>
+						</div>
+	
+						<input type="hidden" th:field="*{idpedido}" />
+										
+					</form>
+				</div>
 			</div>
-		</div>
+				</div>
+				<br />
+				<br />
+				<footer th:replace="layout :: frgFooter"></footer>
 			</div>
-			<br />
-			<br />
-			<footer th:replace="layout :: frgFooter"></footer>
 		</div>
 	</div>
-</div>
+
+	<script th:src="@{/js/pedido-detail.js}"></script>
+	
 </body>
 </html>

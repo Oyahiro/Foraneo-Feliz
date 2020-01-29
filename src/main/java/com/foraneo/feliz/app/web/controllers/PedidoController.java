@@ -6,6 +6,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.foraneo.feliz.app.web.models.entities.Cliente;
 import com.foraneo.feliz.app.web.models.entities.Detalle;
 import com.foraneo.feliz.app.web.models.entities.Pedido;
 import com.foraneo.feliz.app.web.models.entities.Platillo;
@@ -36,23 +40,25 @@ public class PedidoController {
 	private PedidoService srvPedido;
 	
 	@Autowired
-	private UsuarioService srvCliente;
+	private UsuarioService srvUsuario;
 	
 	@Autowired
 	private IPlatilloService srvPlatillo;
 	
 	@GetMapping(value="/create")
-	public String create(Model model/*, @PathVariable(value="id") Integer id*/) {
+	public String create(Model model) {
 		Pedido pedido = new Pedido();
-		//pedido.setPersonaid(id);
-		List<Usuario> clientes = srvCliente.findAll();
+		
+		//List<Cliente> clientes = srvCliente.findAll();
 		List<Platillo> platillos = srvPlatillo.findAll();
 		
-		model.addAttribute("pedido", pedido);  //El model reemplaza al ViewBag
-		model.addAttribute("detalles", new ArrayList<Detalle>());
 		model.addAttribute("title", "Nuevo registro de pedido");
-		model.addAttribute("clientes", clientes);
+		model.addAttribute("pedido", pedido);  //El model reemplaza al ViewBag
+		
+		//model.addAttribute("clientes", clientes);
 		model.addAttribute("platillos", platillos);	
+		
+		model.addAttribute("detalles", new ArrayList<Detalle>());
 		
 		return "pedido/form";
 	}
@@ -98,14 +104,33 @@ public class PedidoController {
 			@SessionAttribute(value="detalles") List<Detalle> detalles, SessionStatus session) {
 		try {
 			if(result.hasErrors()) {
+				System.out.println("************ hasErrores ************");
+				System.out.println("Direccion: " + pedido.getDireccion());
+				System.out.println("Error 0: " + result.getAllErrors().get(0).getDefaultMessage());
+				
+				System.out.println("Detalle: " + detalles.get(0).getPlatillo().getNombre());
 				return "pedido/form";
 			}
 
-
-			//pedido.setCliente(cliente);
-			pedido.setDetalles(detalles);
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			Usuario usuario = srvUsuario.findByUsername(userDetail.getUsername());
+			Cliente cliente = usuario.getCliente();
 			
-			srvPedido.save(pedido); //El service ya sabe si es nuevo o un antiguo y lo actualiza
+			pedido.setTotal(0f);
+			pedido.setDetalles(detalles);
+			pedido.setCliente(cliente);
+			
+			System.out.println("ID: " + pedido.getIdpedido());
+			System.out.println("Estado: " + pedido.getEstado());
+			System.out.println("Total: " + pedido.getTotal());
+			System.out.println("Direccion: " + pedido.getDireccion());
+			System.out.println("Fecha: " + pedido.getFechapedido());
+			
+			System.out.println("Cliente: " + pedido.getCliente().getNombres());
+			System.out.println("Detalle: " + pedido.getDetalles().get(0).getPlatillo().getNombre());
+			
+			srvPedido.save(pedido);
 			session.setComplete();
 		}catch(Exception ex) {
 			//flash.addFlashAttribute("error", "No se pudo guardar");
@@ -115,10 +140,13 @@ public class PedidoController {
 	
 	@PostMapping(value="/addDetail", produces="application/json")
 	public @ResponseBody List<Detalle> addDetail(@RequestBody Detalle detail, 
-			@SessionAttribute(value="detalles") List<Detalle> detalles) {		
+			@SessionAttribute(value="detalles") List<Detalle> detalles) {
 		Platillo platillo = srvPlatillo.findById(detail.getPlatilloid());
-		detail.setPlatillo(platillo);		
-		detalles.add(detail);		
+		float individual = platillo.getPrecio() * detail.getCantidad();
+		detail.setPlatillo(platillo);
+		detail.setTotalindividual(individual);
+		detalles.add(detail);
+		
 		return detalles;		
 	}
 }
