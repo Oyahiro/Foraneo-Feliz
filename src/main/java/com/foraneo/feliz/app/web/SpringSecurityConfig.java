@@ -40,23 +40,28 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/pedido/**").permitAll()*/
 		
 		.antMatchers("/platillo/create").hasAnyRole("ADMIN", "RESTAURANTE")
+		.antMatchers("/platillo/save").hasAnyRole("ADMIN", "RESTAURANTE")
 		.antMatchers("/platillo/list").permitAll()
 		.antMatchers("/platillo/onlylist/**").permitAll()
 		.antMatchers("/platillo/retrieve/**").permitAll()
 		
 		.antMatchers("/restaurante/create").hasAnyRole("ADMIN")
+		.antMatchers("/restaurante/save").hasAnyRole("ADMIN")
 		.antMatchers("/restaurante/list").permitAll()
 		.antMatchers("/restaurante/retrieve/**").permitAll()
 		
 		.antMatchers("/cliente/create").anonymous()
+		.antMatchers("/cliente/save").anonymous()
 		.antMatchers("/cliente/list").hasAnyRole("ADMIN")
 		.antMatchers("/cliente/retrieve/**").hasAnyRole("ADMIN")
 		
 		.antMatchers("/encomendero/create").hasAnyRole("ADMIN")
+		.antMatchers("/encomendero/save").hasAnyRole("ADMIN")
 		.antMatchers("/encomendero/list").hasAnyRole("ADMIN")
 		.antMatchers("/encomendero/retrieve/**").hasAnyRole("ADMIN")
 		
 		.antMatchers("/pedido/create").hasAnyRole("USER")
+		.antMatchers("/pedido/save").hasAnyRole("USER")
 		.antMatchers("/pedido/addDetail").hasAnyRole("USER")
 		.antMatchers("/pedido/list").hasAnyRole("ENCOMENDERO", "USER")
 		.antMatchers("/pedido/retrieve/**").hasAnyRole("ENCOMENDERO", "USER")

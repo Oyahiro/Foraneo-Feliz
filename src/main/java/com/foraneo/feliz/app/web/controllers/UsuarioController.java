@@ -46,7 +46,6 @@ public class UsuarioController {
 				else {
 					model.addAttribute("title","Actualización de registro");
 				}
-				
 				return "usuario/form";
 			}
 			
@@ -60,7 +59,6 @@ public class UsuarioController {
 		catch(Exception ex) {
 			flash.addFlashAttribute("error", "El registro no pudo ser guardado.");
 		}
-		return "redirect:/login";		
+		return "redirect:/";		
 	}
-
 }

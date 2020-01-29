@@ -84,7 +84,7 @@ public class PlatilloController {
 		return "platillo/onlylist";
 	}
 	
-	@PostMapping(value="save")
+	@PostMapping(value="/save")
 	public String save(@Valid Platillo platillo, BindingResult result, Model model, RedirectAttributes flash) {
 		try {
 			if(result.hasErrors()){
