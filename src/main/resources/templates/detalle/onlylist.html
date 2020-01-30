@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<br/>
+	<h5>Detalles del pedido</h5>
+	<table th:if="${list.size() != 0}" class="table table-hover">
+		<thead>
+			<tr>
+				<th><i class="fas fa-utensils"></i>&nbsp;Platillo</th>
+				<th><i class="far fa-sticky-note"></i>&nbsp;Precio</th>
+				<th><i class="fas fa-coins"></i>&nbsp;Cantidad</th>
+				<th><i class="fas fa-coins"></i>&nbsp;Subtotal</th>
+				<!--<th></th>-->
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="pedido : ${list}">
+				<td th:text="${pedido.platillo.nombre}"></td>
+				<td th:text="${pedido.platillo.precio}"></td>
+				<td th:text="${pedido.cantidad}"></td>
+				<td th:text="${pedido.totalindividual}"></td>
+			</tr>
+
+		</tbody>
+	</table>
+
+</body>
+</html>

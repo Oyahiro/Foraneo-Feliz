@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.foraneo.feliz.app.web.models.dao.IDetalle;
 import com.foraneo.feliz.app.web.models.entities.Detalle;
+import com.foraneo.feliz.app.web.models.entities.Pedido;
 
 @Service
 public class DetalleService implements IDetalleService{
@@ -39,4 +40,9 @@ public class DetalleService implements IDetalleService{
 		return (List<Detalle>)dao.findAll();
 	}
 
+	@Override
+	public List<Detalle> findByPedido(Integer id) {
+		Pedido p = dao.findByPedido(id);
+		return p.getDetalles();
+	}
 }

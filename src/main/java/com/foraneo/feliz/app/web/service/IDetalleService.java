@@ -14,4 +14,5 @@ public interface IDetalleService {
 
 	public List<Detalle>findAll();
 	
+	public List<Detalle>findByPedido(Integer id);
 }

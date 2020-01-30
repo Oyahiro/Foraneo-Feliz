@@ -64,6 +64,13 @@ public class DetalleController {
 		return "detalle/list";
 	}
 	
+	@GetMapping(value = "/onlylist/{id}")
+	public String onlylist(@PathVariable(value = "id") Integer id, Model model) {
+		List<Detalle> list = service.findByPedido(id);
+		model.addAttribute("list", list);
+		return "detalle/onlylist";
+	}
+	
 	@PostMapping(value="save")
 	public String save(Detalle detalle, Model model, RedirectAttributes flash) {
 		try {

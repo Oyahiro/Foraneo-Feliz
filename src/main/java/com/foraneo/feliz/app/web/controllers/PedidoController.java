@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,16 +62,16 @@ public class PedidoController {
 		return "pedido/form";
 	}
 	
-	/*@GetMapping(value="/retrieve/{id}")
+	@GetMapping(value="/retrieve/{id}")
 	public String retrieve(@PathVariable(value="id") Integer id, Model model) {
-		Pedido pedido = service.findById(id);
+		Pedido pedido = srvPedido.findById(id);
 		model.addAttribute("pedido", pedido);
 		model.addAttribute("tittle", "Detalle de pedido");
 		
 		return "pedido/card";
 	}
 	
-	@GetMapping(value="/delete/{id}")
+	/*@GetMapping(value="/delete/{id}")
 	public String delete(@PathVariable(value="id") Integer id, Model model, RedirectAttributes flash) {
 		try {
 			service.delete(id);

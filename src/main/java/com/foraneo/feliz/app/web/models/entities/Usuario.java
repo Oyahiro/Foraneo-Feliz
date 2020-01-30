@@ -53,12 +53,9 @@ public class Usuario implements Serializable {
 	@OneToOne(mappedBy = "userRest", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	private Restaurante restaurante;
 	
-<<<<<<< HEAD
 	@OneToOne(mappedBy = "userEnc", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	private Encomendero encomendero;
 	
-=======
->>>>>>> develop
 	public Cliente getCliente() {
 		return cliente;
 	}
