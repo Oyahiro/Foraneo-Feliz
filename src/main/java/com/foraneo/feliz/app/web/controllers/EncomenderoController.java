@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,8 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.foraneo.feliz.app.web.models.entities.Cliente;
 import com.foraneo.feliz.app.web.models.entities.Encomendero;
+import com.foraneo.feliz.app.web.models.entities.Rol;
+import com.foraneo.feliz.app.web.models.entities.Usuario;
 import com.foraneo.feliz.app.web.service.IEncomenderoService;
+import com.foraneo.feliz.app.web.service.UsuarioService;
 
 @Controller
 @RequestMapping(value="/encomendero") //Las rutas se componen por el Mapping del Controlador + el Get Mapping del metodo
@@ -23,6 +28,12 @@ public class EncomenderoController {
 
 	@Autowired //Para crear inyeccion de dependencias entre el controlador y el servicio
 	private IEncomenderoService service;
+	
+	@Autowired
+	private UsuarioService srvUser;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@GetMapping(value="/create")
 	public String create(Model model) {
@@ -68,7 +79,7 @@ public class EncomenderoController {
 		return "encomendero/list";
 	}
 	
-	@PostMapping(value="/save")
+	@PostMapping(value="save")
 	public String save(@Valid Encomendero encomendero, BindingResult result, Model model, RedirectAttributes flash) {
 		try {
 			if(result.hasErrors())
@@ -81,9 +92,21 @@ public class EncomenderoController {
 				}				
 				return"encomendero/form";
 			}
+			
+			Usuario u = new Usuario();
+			u.setNombre(encomendero.getUserEnc().getNombre());
+			u.setContrasenia(passwordEncoder.encode(encomendero.getUserEnc().getContrasenia()));
+			u.getRoles().add(new Rol("ROLE_ENCOMENDERO"));
+			srvUser.save(u);
+			
+			encomendero.setUserEnc(u);
 			service.save(encomendero); //El service ya sabe si es nuevo o un antiguo y lo actualiza
 			flash.addFlashAttribute("message", "Registro guardado con éxito");
+			
+			System.out.print("*************** ID DE ENCOMENDERO: " + encomendero.getIdPersona() + " **************");
+			
 		}catch(Exception ex) {
+			System.out.println("*************** EXCEPCION: " + ex.getMessage() + "***************");
 			flash.addFlashAttribute("error", "No se pudo guardar");
 		}
 		return "redirect:/encomendero/list";
