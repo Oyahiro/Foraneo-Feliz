@@ -169,6 +169,13 @@ public class PedidoController {
 		return detalles;		
 	}
 	
+	@PostMapping(value="/delDetail", produces="application/json")
+	public @ResponseBody List<Detalle> delDetail(@RequestBody Integer id, 
+			@SessionAttribute(value="detalles") List<Detalle> detalles) {
+		detalles.remove(detalles.get(0));
+		return detalles;		
+	}
+	
 	@GetMapping(value = "/report")
 	public String report(Model model) {		
 		model.addAttribute("title", "Reportes de ventas");
