@@ -71,11 +71,16 @@ public class PedidoController {
 		return "pedido/card";
 	}
 	
-	/*@GetMapping(value="/delete/{id}")
+	@GetMapping(value="/delete/{id}")
 	public String delete(@PathVariable(value="id") Integer id, Model model, RedirectAttributes flash) {
 		try {
-			service.delete(id);
-			flash.addFlashAttribute("message", "El registro se eliminó exitosamente");
+			Pedido p = srvPedido.findById(id);
+			if(!p.getEstado()) {
+				srvPedido.delete(id);
+				flash.addFlashAttribute("message", "El registro se eliminó exitosamente");
+			}else {
+				flash.addFlashAttribute("message", "No es posible eliminar un pedido que ya está en camino");
+			}
 		}catch(Exception ex) {
 			flash.addFlashAttribute("message", "El registro no pudo eliminarse"); //El model sirve para la misma vista no si se cambia de vista
 			ex.getStackTrace();
@@ -83,7 +88,7 @@ public class PedidoController {
 		return "redirect:/pedido/list";
 	}
 	
-	@GetMapping(value="/update/{id}")
+	/*@GetMapping(value="/update/{id}")
 	public String update(@PathVariable(value="id") Integer id, Model model) {
 		Pedido pedido = service.findById(id);
 		model.addAttribute("pedido", pedido);
