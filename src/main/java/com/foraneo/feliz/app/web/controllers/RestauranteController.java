@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.foraneo.feliz.app.web.models.entities.Restaurante;
+import com.foraneo.feliz.app.web.models.entities.Rol;
+import com.foraneo.feliz.app.web.models.entities.Usuario;
 import com.foraneo.feliz.app.web.service.IRestauranteService;
+import com.foraneo.feliz.app.web.service.UsuarioService;
 
 @Controller
 @RequestMapping(value="/restaurante") //Las rutas se componen por el Mapping del Controlador + el Get Mapping del metodo
@@ -23,6 +27,12 @@ public class RestauranteController {
 
 	@Autowired //Para crear inyeccion de dependencias entre el controlador y el servicio
 	private IRestauranteService service;
+	
+	@Autowired
+	private UsuarioService srvUser;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@GetMapping(value="/create")
 	public String create(Model model) {
@@ -81,9 +91,21 @@ public class RestauranteController {
 				}				
 				return"restaurante/form";
 			}
+			
+			Usuario u = new Usuario();
+			u.setNombre(restaurante.getUserRest().getNombre());
+			u.setContrasenia(passwordEncoder.encode(restaurante.getUserRest().getContrasenia()));
+			u.getRoles().add(new Rol("ROLE_RESTAURANTE"));
+			srvUser.save(u);
+			
+			restaurante.setUserRest(u);
 			service.save(restaurante); //El service ya sabe si es nuevo o un antiguo y lo actualiza
 			flash.addFlashAttribute("message", "Registro guardado con éxito");
+			
+			System.out.print("*************** ID DE RESTAURANTE: " + restaurante.getIdrestaurante() + " **************");
+			
 		}catch(Exception ex) {
+			System.out.println("*************** EXCEPCION: " + ex.getMessage() + "***************");
 			flash.addFlashAttribute("error", "No se pudo guardar");
 		}
 		return "redirect:/restaurante/list";

@@ -50,6 +50,9 @@ public class Usuario implements Serializable {
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	private Cliente cliente;
 	
+	@OneToOne(mappedBy = "userRest", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	private Restaurante restaurante;
+	
 	public Cliente getCliente() {
 		return cliente;
 	}

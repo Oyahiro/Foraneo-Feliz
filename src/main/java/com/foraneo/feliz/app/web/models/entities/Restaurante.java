@@ -10,7 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -40,7 +42,7 @@ public class Restaurante implements Serializable{
 	private String direccion;
 	
 	@Column(name="TIPO")
-	@Size(max=20)
+	@Size(max=35)
 	@NotBlank
 	private String tipo;
 	
@@ -64,6 +66,10 @@ public class Restaurante implements Serializable{
 	@OneToMany(mappedBy="restaurante", fetch=FetchType.LAZY)
 	private List<Platillo> platillo;
 
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "IDUSUARIO")
+    private Usuario userRest;
+	
 	public Restaurante() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -131,5 +137,13 @@ public class Restaurante implements Serializable{
 
 	public void setPlatillo(List<Platillo> platillo) {
 		this.platillo = platillo;
+	}
+
+	public Usuario getUserRest() {
+		return userRest;
+	}
+
+	public void setUserRest(Usuario userRest) {
+		this.userRest = userRest;
 	}
 }
