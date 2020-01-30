@@ -80,11 +80,9 @@ public class ClienteController {
 	
 	@PostMapping(value="save")
 	public String save(@Valid Cliente cliente, BindingResult result, Model model, RedirectAttributes flash) {
-		System.out.println("*************** SAVE **************");
 		try {
 			if(result.hasErrors())
 			{
-				System.out.println("*************** HAS ERRORS: " + result.getErrorCount() + " **************");
 				if(cliente.getIdPersona() == null) {
 					model.addAttribute("title","Registrar cliente");					
 				}
@@ -99,8 +97,6 @@ public class ClienteController {
 			u.setContrasenia(passwordEncoder.encode(cliente.getUser().getContrasenia()));
 			u.getRoles().add(new Rol("ROLE_USER"));
 			srvUser.save(u);
-			
-			System.out.println("*************** ID DE USUARIO: " + u.getIdusuario() + " **************");
 			
 			cliente.setUser(u);
 			service.save(cliente); //El service ya sabe si es nuevo o un antiguo y lo actualiza

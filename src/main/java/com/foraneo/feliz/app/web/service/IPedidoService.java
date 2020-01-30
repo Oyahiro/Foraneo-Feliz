@@ -2,6 +2,7 @@ package com.foraneo.feliz.app.web.service;
 
 import java.util.List;
 
+import com.foraneo.feliz.app.web.reporting.LlaveValor;
 import com.foraneo.feliz.app.web.models.entities.Pedido;
 
 public interface IPedidoService {
@@ -19,5 +20,9 @@ public interface IPedidoService {
 	/*public List<Pedido> findByEstado();
 	
 	public List<Pedido> findByClienteyEstado(Integer id);*/
+	
+	public List<LlaveValor> countPlatillosMasPedidos();
+	
+	public List<LlaveValor> countEncomenderosMasEficientes();
 	
 }

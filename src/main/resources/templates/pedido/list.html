@@ -24,7 +24,7 @@
 									<th><i class="far fa-sticky-note"></i>&nbsp;Total</th>
 									<th><i class="far fa-sticky-note"></i>&nbsp;Estado</th>
 																
-									<th th:if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_USER'')')}"><a class="btn btn-sm btn-success" th:href="@{/pedido/create}" >
+									<th th:if="${#authorization.expression('hasAnyRole(''ROLE_USER'')')}"><a class="btn btn-sm btn-success" th:href="@{/pedido/create}" >
 										<i class="fas fa-plus"></i>&nbsp;Nuevo</a>
 									</th>
 								</tr>
@@ -52,8 +52,15 @@
 								</tr>
 							</tbody>
 						</table>
+						
+						
 					</div>
 				</div>
+				<br/>
+				<div th:if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'')')}">
+					<a class="btn btn-block btn-info" th:href="@{/pedido/report}">Reportes</a>
+				</div>
+						
 			</div>
 			<br />
 			<br />

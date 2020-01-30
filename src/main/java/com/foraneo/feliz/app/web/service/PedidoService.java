@@ -1,6 +1,12 @@
 package com.foraneo.feliz.app.web.service;
 
+import java.math.BigInteger;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,12 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.foraneo.feliz.app.web.models.dao.IPedido;
 import com.foraneo.feliz.app.web.models.entities.Pedido;
+import com.foraneo.feliz.app.web.reporting.LlaveValor;
 
 @Service
 public class PedidoService implements IPedidoService{
 	
 	@Autowired
 	private IPedido dao;
+	
+	@PersistenceContext
+	private EntityManager em; //Es la instancia de persistencia con la BDD
 
 	@Override
 	@Transactional
@@ -44,7 +54,7 @@ public class PedidoService implements IPedidoService{
 		return dao.findByCliente(id);
 	}
 
-	/*@Override
+		/*@Override
 	public List<Pedido> findByEstado() {
 		return dao.findByEstado();
 	}
@@ -54,4 +64,27 @@ public class PedidoService implements IPedidoService{
 		return dao.findByClienteyEstado(id);
 	}*/
 
+	@Override
+	public List<LlaveValor> countPlatillosMasPedidos() {
+		StoredProcedureQuery consulta = em.createStoredProcedureQuery("ContarPlatillosPedidos");
+		consulta.execute();
+		List<Object[]> datos = consulta.getResultList();
+		
+		return datos.stream()
+				.map(r -> new LlaveValor( r[0].toString(), 
+						new BigInteger(r[1].toString())))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<LlaveValor> countEncomenderosMasEficientes() {
+		StoredProcedureQuery consulta = em.createStoredProcedureQuery("ContarEncomenderosEntregas");
+		consulta.execute();
+		List<Object[]> datos = consulta.getResultList();
+		
+		return datos.stream()
+				.map(r -> new LlaveValor( r[0].toString(), 
+						new BigInteger(r[1].toString())))
+				.collect(Collectors.toList());
+	}
 }

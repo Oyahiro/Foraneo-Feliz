@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: frgHead"></head>
+<body>
+<div id="wrapper">
+	<div th:replace="layout :: frgNavigation"></div>
+	<div th:replace="layout :: frgHeaderSection"></div>
+	<div id="content-wrapper" class="d-flex flex-column">
+		<!-- Begin Page Content -->
+		<div class="container">
+			<div class="container-fluid">				
+				<br />
+				<div class="card col-md-12">
+					<div class="card-body">
+						<div class="form-group row">
+							<h3 class="card-title col-sm-10" th:text="${title}"></h3>
+						</div>
+						<table class="table ">	
+							<tr>
+								<td>
+									<div class="container">
+										<div id="canvas-holder">
+											<canvas id="chart-area"></canvas>
+											<canvas id="chart-area2"></canvas>
+										</div>					
+									</div>
+								</td>
+								
+							</tr>
+						</table>		
+					</div>
+				</div>
+			</div>
+			<br />
+			<br />
+			<footer th:replace="layout :: frgFooter"></footer>
+			<script th:src="@{/js/pedido-report.js}"></script>
+		</div>
+	</div>
+</div>
+</body>
+</html>

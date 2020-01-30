@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.foraneo.feliz.app.web.reporting.LlaveValor;
 import com.foraneo.feliz.app.web.models.entities.Cliente;
 import com.foraneo.feliz.app.web.models.entities.Detalle;
 import com.foraneo.feliz.app.web.models.entities.Pedido;
@@ -161,4 +162,24 @@ public class PedidoController {
 		
 		return detalles;		
 	}
+	
+	@GetMapping(value = "/report")
+	public String report(Model model) {		
+		model.addAttribute("title", "Reportes de ventas");
+		return "pedido/report";
+	}
+	
+	@GetMapping(value = "/loadData", produces="application/json")
+	public @ResponseBody List<LlaveValor> loadData() {	
+		List<LlaveValor> lista = srvPedido.countPlatillosMasPedidos();
+		return lista;
+	}
+
+	
+	@GetMapping(value = "/loadData2", produces="application/json")
+	public @ResponseBody List<LlaveValor> loadData2() {
+		List<LlaveValor> lista = srvPedido.countEncomenderosMasEficientes();
+		return lista;
+	}
+	
 }
