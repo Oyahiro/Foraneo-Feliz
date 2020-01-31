@@ -151,7 +151,6 @@ public class Pedido implements Serializable{
 	
 	@PrePersist // Se llama al método antes de que la entidad se inserte en la base de datos
     public void prePersist() {
-        estado = false;
         fechapedido = Calendar.getInstance();
     }
 	

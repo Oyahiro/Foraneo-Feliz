@@ -26,7 +26,7 @@ function cargar(){
 
 function addDetail(){
 	var detail = {
-			platilloid : $("#cmbTipo").val(),
+			platilloid : $("#cmbPlatillo").val(),
 			cantidad : $("#txtCantidad").val()
 	}
 	console.log(detail);
@@ -53,7 +53,6 @@ function addDetail(){
 				var nombre = item.platillo.restaurante.nombre;
 				if(!rest.includes(nombre)){
 					rest.push(nombre);
-					alert(rest.length);
 				}
 				id+=1;
 			});
@@ -96,9 +95,44 @@ function delDetail(comp){
 	});
 }
 
+function cargarPlatillos() {
+	var id = document.getElementById("cmbRestaurante").value;
+	$.ajax({
+		url : "/pedido/platillos/",
+		method : 'POST',
+		headers: {"X-CSRF-TOKEN": $("input[name='_csrf']").val()},
+		contentType : "application/json",
+		dataType : "json",
+		data : JSON.stringify(id),
+		success : function(response){
+			var id=0;
+			var combo = document.getElementById("cmbPlatillo");
+			
+			while (combo.length > 0) {
+		        combo.remove(combo.length-1);
+		    }
+			
+			$.each(response, function(i, item){
+				var option = document.createElement('option');
+
+			    combo.options.add(option, id);
+			    combo.options[id].value = item.idplatillo;
+			    combo.options[id].innerText = item.nombre;
+			    
+			    id+=1;
+			});				
+		},
+		error : function(err){
+			console.log(err);
+		}		
+	});
+	
+}
+
 $(document).ready(function(){
 	cargar();
 	$("#btnAgregar").click(function(){
 		addDetail();
 	});
+	document.getElementById("cmbRestaurante").addEventListener("change", cargarPlatillos);
 });

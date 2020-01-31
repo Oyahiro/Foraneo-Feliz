@@ -43,20 +43,26 @@
 						<table id="tblAgregarDetalle">
 							<thead>
 								<tr>
+									<td>Restaurante</td>
 									<td>Platillo</td>
 									<td>Cantidad</td>
-									<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-									<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-									<td>Valor de envío</td>
+									<td></td>
+									<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td><strong>Valor de envío</strong></td>
 								</tr>
 							</thead>				
 							<tbody>
 								<tr>
 									<td>
-										<select class="nice-select wide form-control" id="cmbTipo" name="cmbTipo" >
+										<select class="nice-select wide form-control" id="cmbRestaurante" name="cmbRestaurante" >
 										<option value="0">-- Seleccione --</option>
-										<option th:each="platillo : ${platillos}" th:value="${platillo.idplatillo}"
-											th:text="${platillo.nombre}"></option>
+										<option th:each="rest : ${restaurantes}" th:value="${rest.idrestaurante}"
+											th:text="${rest.nombre}"></option>
+									</select>										
+									</td>
+									<td>
+										<select class="nice-select wide form-control" id="cmbPlatillo" name="cmbPlatillo" >
+										<option value="0">-- Seleccione --</option>
 									</select>										
 									</td>																						
 																																		

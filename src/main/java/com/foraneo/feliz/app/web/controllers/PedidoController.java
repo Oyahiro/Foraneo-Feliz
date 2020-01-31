@@ -32,6 +32,7 @@ import com.foraneo.feliz.app.web.models.entities.Platillo;
 import com.foraneo.feliz.app.web.models.entities.Restaurante;
 import com.foraneo.feliz.app.web.models.entities.Usuario;
 import com.foraneo.feliz.app.web.service.IPlatilloService;
+import com.foraneo.feliz.app.web.service.IRestauranteService;
 import com.foraneo.feliz.app.web.service.PedidoService;
 import com.foraneo.feliz.app.web.service.UsuarioService;
 
@@ -49,16 +50,19 @@ public class PedidoController {
 	@Autowired
 	private IPlatilloService srvPlatillo;
 	
+	@Autowired
+	private IRestauranteService srvRestaurante;
+	
 	@GetMapping(value="/create")
 	public String create(Model model) {
 		Pedido pedido = new Pedido();
 		
-		List<Platillo> platillos = srvPlatillo.findAll();
+		List<Restaurante> restaurantes = srvRestaurante.findAll();
 		
 		model.addAttribute("title", "Nuevo registro de pedido");
 		model.addAttribute("pedido", pedido);  //El model reemplaza al ViewBag
 		
-		model.addAttribute("platillos", platillos);	
+		model.addAttribute("restaurantes", restaurantes);
 		model.addAttribute("detalles", new ArrayList<Detalle>());
 		
 		return "pedido/form";
@@ -93,14 +97,18 @@ public class PedidoController {
 	@GetMapping(value="/update/{id}")
 	public String update(@PathVariable(value="id") Integer id, Model model) {
 		Pedido pedido = srvPedido.findById(id);
-		List<Platillo> platillos = srvPlatillo.findAll();
 		
-		
-		model.addAttribute("pedido", pedido);
-		model.addAttribute("title", "Actualizar datos de pedido");
-		model.addAttribute("platillos", platillos);	
-		model.addAttribute("detalles", pedido.getDetalles());
-		return "pedido/form";
+		if(!pedido.getEstado()) {
+			List<Restaurante> restaurantes = srvRestaurante.findAll();
+			
+			model.addAttribute("pedido", pedido);
+			model.addAttribute("title", "Actualizar datos de pedido");
+			model.addAttribute("restaurantes", restaurantes);	
+			model.addAttribute("detalles", pedido.getDetalles());
+			return "pedido/form";
+		}else {
+			return "redirect:/pedido/list";
+		}
 	}
 	
 	@GetMapping(value="/list")
@@ -115,7 +123,10 @@ public class PedidoController {
 		switch(rol) {
 			case "ROLE_USER":
 				list = srvPedido.findByCliente(usuario.getCliente().getIdPersona());
-				list.get(0).getDetalles().get(0).getPlatillo().getRestaurante().getIdrestaurante();
+				
+				if(!list.isEmpty())
+					list.get(0).getDetalles().get(0).getPlatillo().getRestaurante().getIdrestaurante();
+				
 				model.addAttribute("list", list);
 				return "pedido/list";
 			
@@ -161,6 +172,7 @@ public class PedidoController {
 			pedido.setTotal(total);
 			pedido.setDetalles(detalles);
 			pedido.setCliente(cliente);
+			pedido.setEstado(false);
 			
 			srvPedido.save(pedido);
 			session.setComplete();
@@ -192,6 +204,11 @@ public class PedidoController {
 	@PostMapping(value="/cargarLista", produces="application/json")
 	public @ResponseBody List<Detalle> cargarLista(@SessionAttribute(value="detalles") List<Detalle> detalles) {
 		return detalles;		
+	}
+	
+	@PostMapping(value="/platillos", produces="application/json")
+	public @ResponseBody List<Platillo> platillos(@RequestBody Integer id) {
+		return this.srvPlatillo.findByRestaurante(id);
 	}
 	
 	@GetMapping(value="/atender/{id}")
