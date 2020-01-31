@@ -27,6 +27,9 @@
 									<th th:if="${#authorization.expression('hasAnyRole(''ROLE_USER'')')}"><a class="btn btn-sm btn-success" th:href="@{/pedido/create}" >
 										<i class="fas fa-plus"></i>&nbsp;Nuevo</a>
 									</th>
+									
+									<th th:if="${#authorization.expression('hasAnyRole(''ROLE_ENCOMENDERO'')')}">
+									</th>
 								</tr>
 							</thead>
 							<tbody>						
@@ -47,6 +50,15 @@
 											    th:href="@{/pedido/retrieve/} + ${pedido.idpedido}">
 												<i class="far fa-id-card"></i>
 											</a>									
+										</div>
+									</td>
+									
+									<td th:if="${#authorization.expression('hasAnyRole(''ROLE_ENCOMENDERO'')')}">
+										<div class="row">
+											<a class="btn btn-block btn-info" title="Atender"
+											   th:href="@{/pedido/atender/} + ${pedido.idpedido}">
+												<i class="far fa-edit"></i>&nbsp;Atender
+											</a>
 										</div>
 									</td>
 								</tr>

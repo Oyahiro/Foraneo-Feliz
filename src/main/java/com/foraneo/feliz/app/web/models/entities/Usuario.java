@@ -118,6 +118,22 @@ public class Usuario implements Serializable {
 		this.creadoEn = creadoEn;
 	}
 
+	public Restaurante getRestaurante() {
+		return restaurante;
+	}
+
+	public void setRestaurante(Restaurante restaurante) {
+		this.restaurante = restaurante;
+	}
+
+	public Encomendero getEncomendero() {
+		return encomendero;
+	}
+
+	public void setEncomendero(Encomendero encomendero) {
+		this.encomendero = encomendero;
+	}
+
 	@PrePersist // Se llama al método antes de que la entidad se inserte en la base de datos
     public void prePersist() {
         creadoEn = Calendar.getInstance();

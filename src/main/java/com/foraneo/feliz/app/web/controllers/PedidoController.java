@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.foraneo.feliz.app.web.reporting.LlaveValor;
 import com.foraneo.feliz.app.web.models.entities.Cliente;
 import com.foraneo.feliz.app.web.models.entities.Detalle;
+import com.foraneo.feliz.app.web.models.entities.Encomendero;
 import com.foraneo.feliz.app.web.models.entities.Pedido;
 import com.foraneo.feliz.app.web.models.entities.Platillo;
 import com.foraneo.feliz.app.web.models.entities.Usuario;
@@ -66,7 +67,7 @@ public class PedidoController {
 	public String retrieve(@PathVariable(value="id") Integer id, Model model) {
 		Pedido pedido = srvPedido.findById(id);
 		model.addAttribute("pedido", pedido);
-		model.addAttribute("tittle", "Detalle de pedido");
+		model.addAttribute("title", pedido.getDetalles().get(0).getPlatillo().getRestaurante().getNombre());
 		
 		return "pedido/card";
 	}
@@ -119,7 +120,7 @@ public class PedidoController {
 			/*case "ROLE_RESTAURANTE":
 				List<Pedido> list = srvPedido.findByClienteyEstado(usuario.getCliente().getIdPersona());
 				model.addAttribute("list", list);
-				return "pedido/list";
+				return "pedido/list";*/
 				
 			case "ROLE_ENCOMENDERO":
 				list = srvPedido.findByEstado();
@@ -130,7 +131,7 @@ public class PedidoController {
 				list = srvPedido.findAll();
 				model.addAttribute("list", list);
 				return "pedido/list";
-			*/
+			
 			default:
 				model.addAttribute("list", list);
 				return "pedido/list";
@@ -150,7 +151,11 @@ public class PedidoController {
 			Usuario usuario = srvUsuario.findByUsername(userDetail.getUsername());
 			Cliente cliente = usuario.getCliente();
 			
-			pedido.setTotal(0f);
+			float total=0;
+			for(Detalle d:detalles) 
+				total+=d.getTotalindividual();
+			
+			pedido.setTotal(total);
 			pedido.setDetalles(detalles);
 			pedido.setCliente(cliente);
 			
@@ -184,6 +189,23 @@ public class PedidoController {
 	@PostMapping(value="/cargarLista", produces="application/json")
 	public @ResponseBody List<Detalle> cargarLista(@SessionAttribute(value="detalles") List<Detalle> detalles) {
 		return detalles;		
+	}
+	
+	@GetMapping(value="/atender/{id}")
+	public String atender(@PathVariable(value="id") Integer id, Model model) {
+		Pedido pedido = srvPedido.findById(id);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		Usuario usuario = srvUsuario.findByUsername(userDetail.getUsername());
+		Encomendero encomendero = usuario.getEncomendero();
+		
+		pedido.setEncomendero(encomendero);
+		pedido.setEstado(true);
+		
+		srvPedido.save(pedido);
+		
+		return "redirect:/pedido/retrieve/"+pedido.getIdpedido();
 	}
 	
 	@GetMapping(value = "/report")

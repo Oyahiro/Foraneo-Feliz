@@ -13,8 +13,8 @@ public interface IPedido extends CrudRepository<Pedido, Integer>{
 	public List<Pedido> findByCliente(Integer id);
 	
 	/*@Query("SELECT P FROM Pedido P WHERE P.estado = :false")
-	public List<Pedido> findByEstado();
+	public List<Pedido> findByEstado();*/
 	
-	@Query("SELECT P FROM Pedido P WHERE P.cliente.idPersona = :id AND P.estado = :false")
+	/*@Query("SELECT P FROM Pedido P WHERE P.cliente.idPersona = :id AND P.estado = :false")
 	public List<Pedido> findByClienteyEstado(Integer id);*/
 }

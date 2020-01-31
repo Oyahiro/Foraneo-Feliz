@@ -64,6 +64,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/pedido/save").hasAnyRole("USER")
 		.antMatchers("/pedido/addDetail").hasAnyRole("USER")
 		.antMatchers("/pedido/delDetail").hasAnyRole("USER")
+		.antMatchers("/pedido/atender").hasAnyRole("ENCOMENDERO")
+		.antMatchers("/pedido/retrieve/**").hasAnyRole("ENCOMENDERO", "USER", "RESTAURANTE", "ADMIN")
 		.antMatchers("/pedido/list").hasAnyRole("ENCOMENDERO", "USER", "RESTAURANTE", "ADMIN")
 		.antMatchers("/pedido/onlylist/**").hasAnyRole("ENCOMENDERO", "USER", "RESTAURANTE", "ADMIN")
 		.antMatchers("/pedido/report").hasAnyRole("ADMIN")

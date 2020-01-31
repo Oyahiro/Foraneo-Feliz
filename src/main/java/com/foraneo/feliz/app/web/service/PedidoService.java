@@ -1,6 +1,7 @@
 package com.foraneo.feliz.app.web.service;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,15 +55,16 @@ public class PedidoService implements IPedidoService{
 		return dao.findByCliente(id);
 	}
 
-		/*@Override
-	public List<Pedido> findByEstado() {
-		return dao.findByEstado();
-	}
-
 	@Override
-	public List<Pedido> findByClienteyEstado(Integer id) {
-		return dao.findByClienteyEstado(id);
-	}*/
+	public List<Pedido> findByEstado() {
+		List<Pedido> pedidos = (List<Pedido>) dao.findAll();
+		List<Pedido> npedidos = new ArrayList<Pedido>();
+		for(Pedido p: pedidos) {
+			if(!p.getEstado())
+				npedidos.add(p);
+		}
+		return npedidos;
+	}
 
 	@Override
 	public List<LlaveValor> countPlatillosMasPedidos() {

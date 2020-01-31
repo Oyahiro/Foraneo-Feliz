@@ -157,7 +157,6 @@ public class Pedido implements Serializable{
 	
 	@PreUpdate // Se llama al método antes de que la entidad se actualice en la base de datos
     public void preUpdate() {
-        estado = false;
         fechapedido = Calendar.getInstance();
     }
 	
