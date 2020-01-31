@@ -88,13 +88,18 @@ public class PedidoController {
 		return "redirect:/pedido/list";
 	}
 	
-	/*@GetMapping(value="/update/{id}")
+	@GetMapping(value="/update/{id}")
 	public String update(@PathVariable(value="id") Integer id, Model model) {
-		Pedido pedido = service.findById(id);
+		Pedido pedido = srvPedido.findById(id);
+		List<Platillo> platillos = srvPlatillo.findAll();
+		
+		
 		model.addAttribute("pedido", pedido);
 		model.addAttribute("title", "Actualizar datos de pedido");
+		model.addAttribute("platillos", platillos);	
+		model.addAttribute("detalles", pedido.getDetalles());
 		return "pedido/form";
-	}*/
+	}
 	
 	@GetMapping(value="/list")
 	public String list(Model model) {
@@ -173,6 +178,11 @@ public class PedidoController {
 	public @ResponseBody List<Detalle> delDetail(@RequestBody Integer id, 
 			@SessionAttribute(value="detalles") List<Detalle> detalles) {
 		detalles.remove(detalles.get(0));
+		return detalles;		
+	}
+	
+	@PostMapping(value="/cargarLista", produces="application/json")
+	public @ResponseBody List<Detalle> cargarLista(@SessionAttribute(value="detalles") List<Detalle> detalles) {
 		return detalles;		
 	}
 	

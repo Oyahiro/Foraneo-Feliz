@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -150,6 +151,12 @@ public class Pedido implements Serializable{
 	
 	@PrePersist // Se llama al método antes de que la entidad se inserte en la base de datos
     public void prePersist() {
+        estado = false;
+        fechapedido = Calendar.getInstance();
+    }
+	
+	@PreUpdate // Se llama al método antes de que la entidad se actualice en la base de datos
+    public void preUpdate() {
         estado = false;
         fechapedido = Calendar.getInstance();
     }
