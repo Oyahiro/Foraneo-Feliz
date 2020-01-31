@@ -66,6 +66,7 @@ public class Restaurante implements Serializable{
 	@OneToMany(mappedBy="restaurante", fetch=FetchType.LAZY)
 	private List<Platillo> platillo;
 
+	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IDUSUARIO")
     private Usuario userRest;

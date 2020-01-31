@@ -187,6 +187,7 @@ public class PedidoController {
 			@SessionAttribute(value="detalles") List<Detalle> detalles) {
 		Platillo platillo = srvPlatillo.findById(detail.getPlatilloid());
 		float individual = platillo.getPrecio() * detail.getCantidad();
+		platillo.getRestaurante().setUserRest(null);
 		detail.setPlatillo(platillo);
 		detail.setTotalindividual(individual);
 		detalles.add(detail);
@@ -197,18 +198,28 @@ public class PedidoController {
 	@PostMapping(value="/delDetail", produces="application/json")
 	public @ResponseBody List<Detalle> delDetail(@RequestBody Integer id, 
 			@SessionAttribute(value="detalles") List<Detalle> detalles) {
-		detalles.remove(detalles.get(0));
+		detalles.remove(detalles.get(id));
 		return detalles;		
 	}
 	
 	@PostMapping(value="/cargarLista", produces="application/json")
 	public @ResponseBody List<Detalle> cargarLista(@SessionAttribute(value="detalles") List<Detalle> detalles) {
+		for(Detalle de:detalles) {
+			de.getPlatillo().getRestaurante().setUserRest(null);
+		}
+		
 		return detalles;		
 	}
 	
 	@PostMapping(value="/platillos", produces="application/json")
 	public @ResponseBody List<Platillo> platillos(@RequestBody Integer id) {
-		return this.srvPlatillo.findByRestaurante(id);
+		List<Platillo> nplatillos = srvPlatillo.findByRestaurante(id);
+		
+		//Si no se hace esto aparece el error parsererror en el javascript
+		//for(Platillo p: nplatillos)
+			//p.getRestaurante().setUserRest(null);
+		
+		return nplatillos;
 	}
 	
 	@GetMapping(value="/atender/{id}")
@@ -240,7 +251,6 @@ public class PedidoController {
 		return lista;
 	}
 
-	
 	@GetMapping(value = "/loadData2", produces="application/json")
 	public @ResponseBody List<LlaveValor> loadData2() {
 		List<LlaveValor> lista = srvPedido.countEncomenderosMasEficientes();

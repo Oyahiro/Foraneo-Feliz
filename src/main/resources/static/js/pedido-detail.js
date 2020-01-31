@@ -7,7 +7,9 @@ function cargar(){
 		dataType : "json",
 		success : function(response){
 			$("#tblDetalle").html("");
-			var id=0;
+			var id = 0;
+			var rest = new Array();
+			var valor = 2;
 			$.each(response, function(i, item){
 				$("#tblDetalle").append("<tr>");
 				$("#tblDetalle").append("<td>" + item.platillo.nombre + "</td>");
@@ -15,8 +17,14 @@ function cargar(){
 				$("#tblDetalle").append("<td>" + item.cantidad + "</td>");
 				$("#tblDetalle").append("<td>" + item.totalindividual + "</td>");
 				$("#tblDetalle").append("<td><button  onclick='delDetail(this)' type='button' id='"+id+"' class='btn btn-sm btn-danger'><i class='fas fa-minus'></i></button></td>");
+				var nombre = item.platillo.restaurante.nombre;
+				if(!rest.includes(nombre)){
+					rest.push(nombre);
+				}
 				id+=1;
-			});						
+			});	
+			valor *= rest.length;
+			document.getElementById('valorEnvio').innerHTML= valor;
 		},
 		error : function(err){
 			console.log(err);
@@ -120,7 +128,7 @@ function cargarPlatillos() {
 			    combo.options[id].innerText = item.nombre;
 			    
 			    id+=1;
-			});				
+			});		
 		},
 		error : function(err){
 			console.log(err);
