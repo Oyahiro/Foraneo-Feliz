@@ -115,6 +115,24 @@ public class PlatilloController {
 			else {
 				model.addAttribute("title","Actualizar platillo");
 			}
+			
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			Usuario usuario = srvUsuario.findByUsername(userDetail.getUsername());
+			String rol = usuario.getRoles().get(0).getNombre();
+			
+			switch(rol) {
+				case "ROLE_ADMIN":
+					service.save(platillo); //El service ya sabe si es nuevo o un antiguo y lo actualiza
+					flash.addFlashAttribute("message", "Registro guardado con éxito");
+					break;
+				case "ROLE_RESTAURANTE":
+					Restaurante restaurante = usuario.getRestaurante();
+					platillo.setRestaurante(restaurante);
+					service.save(platillo);
+					break;
+			}
+			
 			service.save(platillo); //El service ya sabe si es nuevo o un antiguo y lo actualiza
 			flash.addFlashAttribute("message", "Registro guardado con éxito");
 		}catch(Exception ex) {
