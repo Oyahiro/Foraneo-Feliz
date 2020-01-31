@@ -17,6 +17,8 @@ public interface IPedidoService {
 	
 	public List<Pedido> findByCliente(Integer id);
 	
+	public List<Pedido> findByRestaurante(Integer id);
+	
 	public List<Pedido> findByEstado();
 	
 	public List<LlaveValor> countPlatillosMasPedidos();

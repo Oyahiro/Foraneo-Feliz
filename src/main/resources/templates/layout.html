@@ -50,7 +50,7 @@
 				<a class="nav-link js-scroll-trigger" th:href="@{/encomendero/list}">Encomendero</a>
 			</li>
 					
-			<li class="nav-item">
+			<li class="nav-item" th:if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_USER'',''ROLE_ENCOMENDERO'')')}">
 				<a class="nav-link js-scroll-trigger" th:href="@{/restaurante/list}">Restaurante</a>
 			</li>
 				
@@ -85,7 +85,7 @@
 	    <div class="intro-text">
 	      <div class="intro-lead-in">¡Bienvenido!</div>
 	      <div class="intro-heading text-uppercase">El Foraneo Feliz</div>
-	      <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Hacer pedido</a>
+	      <a th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" th:href="@{/pedido/create}">Hacer pedido</a>
 	    </div>
 	  </div>
 	  </header>

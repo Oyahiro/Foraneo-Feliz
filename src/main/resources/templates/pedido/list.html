@@ -39,15 +39,17 @@
 									<td th:text="${pedido.total}"></td>
 									<td th:text="${pedido.estadoPedido()}"></td>
 									
-									<td th:if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_USER'')')}">
+									<td>
 										<div class="row">
 											<a class="btn btn-sm btn-warning" title="Editar"
-											   th:href="@{/pedido/update/} + ${pedido.idpedido}">
+											   th:href="@{/pedido/update/} + ${pedido.idpedido}"
+											   th:if="${#authorization.expression('hasAnyRole(''ROLE_USER'')')}">
 												<i class="far fa-edit"></i>
 											</a>
 											&nbsp;&nbsp;&nbsp;
 											<a class="btn btn-sm btn-info" title="Ver"
-											    th:href="@{/pedido/retrieve/} + ${pedido.idpedido}">
+											    th:href="@{/pedido/retrieve/} + ${pedido.idpedido}"
+											    th:if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_USER'')')}">
 												<i class="far fa-id-card"></i>
 											</a>									
 										</div>

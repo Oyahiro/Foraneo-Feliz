@@ -5,6 +5,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,10 +17,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.foraneo.feliz.app.web.models.entities.Pedido;
 import com.foraneo.feliz.app.web.models.entities.Platillo;
 import com.foraneo.feliz.app.web.models.entities.Restaurante;
+import com.foraneo.feliz.app.web.models.entities.Usuario;
 import com.foraneo.feliz.app.web.service.IPlatilloService;
 import com.foraneo.feliz.app.web.service.IRestauranteService;
+import com.foraneo.feliz.app.web.service.UsuarioService;
 
 @Controller
 @RequestMapping(value="/platillo") //Las rutas se componen por el Mapping del Controlador + el Get Mapping del metodo
@@ -25,6 +31,9 @@ public class PlatilloController {
 
 	@Autowired //Para crear inyeccion de dependencias entre el controlador y el servicio
 	private IPlatilloService service;
+	
+	@Autowired
+	private UsuarioService srvUsuario;
 	
 	@Autowired
 	private IRestauranteService reservice;
@@ -71,9 +80,19 @@ public class PlatilloController {
 	
 	@GetMapping(value="/list")
 	public String list(Model model) {
-		List<Platillo> list = service.findAll();
-		model.addAttribute("list", list);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		Usuario usuario = srvUsuario.findByUsername(userDetail.getUsername());
+		String rol = usuario.getRoles().get(0).getNombre();
+		List<Platillo> list = null;
 		model.addAttribute("title", "Lista de platillos");
+		
+		if(rol.equals("ROLE_RESTAURANTE")) 
+			list = service.findByRestaurante(usuario.getRestaurante().getIdrestaurante());
+		else 
+			list = service.findAll();
+		
+		model.addAttribute("list", list);
 		return "platillo/list";
 	}
 	

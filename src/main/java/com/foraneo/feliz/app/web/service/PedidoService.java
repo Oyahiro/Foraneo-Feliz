@@ -89,4 +89,15 @@ public class PedidoService implements IPedidoService{
 						new BigInteger(r[1].toString())))
 				.collect(Collectors.toList());
 	}
+
+	@Override
+	public List<Pedido> findByRestaurante(Integer id) {
+		List<Pedido> pedidos = (List<Pedido>) dao.findAll();
+		List<Pedido> npedidos = new ArrayList<Pedido>();
+		for(Pedido p: pedidos) {
+			if(p.getDetalles().get(0).getPlatillo().getRestaurante().getIdrestaurante() == id)
+				npedidos.add(p);
+		}
+		return npedidos;
+	}
 }

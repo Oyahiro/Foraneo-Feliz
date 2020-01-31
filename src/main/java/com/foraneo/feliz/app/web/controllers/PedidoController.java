@@ -29,6 +29,7 @@ import com.foraneo.feliz.app.web.models.entities.Detalle;
 import com.foraneo.feliz.app.web.models.entities.Encomendero;
 import com.foraneo.feliz.app.web.models.entities.Pedido;
 import com.foraneo.feliz.app.web.models.entities.Platillo;
+import com.foraneo.feliz.app.web.models.entities.Restaurante;
 import com.foraneo.feliz.app.web.models.entities.Usuario;
 import com.foraneo.feliz.app.web.service.IPlatilloService;
 import com.foraneo.feliz.app.web.service.PedidoService;
@@ -114,13 +115,15 @@ public class PedidoController {
 		switch(rol) {
 			case "ROLE_USER":
 				list = srvPedido.findByCliente(usuario.getCliente().getIdPersona());
+				list.get(0).getDetalles().get(0).getPlatillo().getRestaurante().getIdrestaurante();
 				model.addAttribute("list", list);
 				return "pedido/list";
 			
-			/*case "ROLE_RESTAURANTE":
-				List<Pedido> list = srvPedido.findByClienteyEstado(usuario.getCliente().getIdPersona());
+			case "ROLE_RESTAURANTE":
+				Restaurante rest = usuario.getRestaurante();
+				list = srvPedido.findByRestaurante(rest.getIdrestaurante());
 				model.addAttribute("list", list);
-				return "pedido/list";*/
+				return "pedido/list";
 				
 			case "ROLE_ENCOMENDERO":
 				list = srvPedido.findByEstado();

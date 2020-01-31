@@ -42,7 +42,7 @@ public class Restaurante implements Serializable{
 	private String direccion;
 	
 	@Column(name="TIPO")
-	@Size(max=35)
+	@Size(max=40)
 	@NotBlank
 	private String tipo;
 	
